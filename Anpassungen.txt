@@ -16,3 +16,50 @@ interface BuchData <<entity>> {
     + schlagwoerter?: Array<string>
     + autoren: any
   }
+
+
+
+
+
+  Hier werden all unsere Dokumentationsschritte veröffentlicht.
+----------------------------------------------------------------------------------------------------
+buch    ->  film
+---------------------------------------------duy-08.11.2020-----------------------------------------
+(filme ->  filme)     //wurde auch geändert oder?
+----------------------------------------------------------------------------------------------------
+verlag  ->  produktion
+autoren ->  regisseure
+autor   ->  regisseur
+druckausgabe -> zweidimensional
+kindle  ->  dreidimensional
+prodnr    ->  prodnr
+titel   ->  titel
+preis   ->  preis
+---------------------------------------------duy-08.11.2020-----------------------------------------
+/html/index.ts
+./neuer-film -> ./neuer-film
+/html/neuer-film.ts
+Dateinamenänderung neuer-film.ts -> neuer-film.ts
+neuesBuch -> neuerFilm
+neues-film -> neuer-film
+Neues Film -> Neuer Film
+/html/suche.ts
+BuchService -> FilmService
+buchService -> filmService
+/rest/film-file.request-handler.ts
+BuchFileService -> FilmFileService
+BuchFileServiceError -> FilmFileServiceError
+BuchNotExists -> FilmNotExists
+BuchFileRequestHandler -> FilmFileRequestHandler
+kein Film -> keinen Film
+/rest/film.request-handler.ts
+BuchData -> FilmData
+BuchInvalid -> FilmInvalid
+BuchServiceError -> FilmServiceError
+BuchRequestHandler -> FilmRequestHandler
+buchData -> filmData
+buchSaved -> filmSaved
+----------------------------------------------------------------------------------------------------
+FOO_PRODUKTION -> CONSTANTIN_FILM
+NO_PRODUKTION -> ENDLESS_PRODUKTION
+BAR_PRODUKTION -> BIG_PRODUKTION
