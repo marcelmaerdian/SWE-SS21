@@ -31,36 +31,36 @@ Content-Type: application/x-www-form-urlencoded
 
 username=admin&password=FALSCH
 
-### Neues Buch anlegen
-POST {{restUrl}}/buecher
+### Neues Auto anlegen
+POST {{restUrl}}/autos
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-neu.json
+< .\json\auto-neu.json
 
-### Neues Buch mit ungueltigen Daten anlegen
-POST {{restUrl}}/buecher
+### Neues Auto mit ungueltigen Daten anlegen
+POST {{restUrl}}/autos
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-neu-invalid.json
+< .\json\auto-neu-invalid.json
 
-### Neues Buch anlegen, aber der Titel existiert bereits
-POST {{restUrl}}/buecher
+### Neues Auto anlegen, aber der Modell existiert bereits
+POST {{restUrl}}/autos
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-neu.titel-exists.json
+< .\json\auto-neu.modell-exists.json
 
-### Neues Buch anlegen, aber die ISBN-Nummer existiert bereits
-POST {{restUrl}}/buecher
+### Neues Auto anlegen, aber die ISBN-Nummer existiert bereits
+POST {{restUrl}}/autos
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-neu.isbn-exists.json
+< .\json\auto-neu.isbn-exists.json
 
-### Neues Buch ohne Login anlegen
-POST {{restUrl}}/buecher
+### Neues Auto ohne Login anlegen
+POST {{restUrl}}/autos
 Content-Type: application/json
 
-< .\json\buch-neu.json
+< .\json\auto-neu.json

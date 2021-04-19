@@ -17,17 +17,17 @@
 // N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
 //
 
-### Neues Buch anlegen
+### Neues Auto anlegen
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 mutation {
-  createBuch(
-    titel: "Test",
+  createAuto(
+    modell: "Test",
     rating: 1,
     art: "KINDLE",
-    verlag: "FOO_VERLAG",
+    produzent: "FOO_VERLAG",
     preis: 11.1,
     rabatt: 0.011,
     lieferbar: true,
@@ -38,18 +38,18 @@ mutation {
   )
 }
 
-### Vorhandenes Buch aktualisieren
+### Vorhandenes Auto aktualisieren
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 mutation {
-  updateBuch(
+  updateAuto(
     _id: "00000000-0000-0000-0000-000000000003",
-    titel: "Geaendert",
+    modell: "Geaendert",
     rating: 5,
     art: "DRUCKAUSGABE",
-    verlag: "FOO_VERLAG",
+    produzent: "FOO_VERLAG",
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: false,
@@ -64,11 +64,11 @@ mutation {
   )
 }
 
-### Vorhandenes Buch loeschen
+### Vorhandenes Auto loeschen
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 mutation {
-  deleteBuch(id: "00000000-0000-0000-0000-000000000004")
+  deleteAuto(id: "00000000-0000-0000-0000-000000000004")
 }

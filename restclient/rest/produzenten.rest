@@ -17,5 +17,5 @@
 // N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
 //
 
-### Suche alle Verlage
-GET {{restUrl}}/verlage
+### Suche alle Produzente
+GET {{restUrl}}/produzente

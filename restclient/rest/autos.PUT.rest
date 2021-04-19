@@ -31,49 +31,49 @@ Content-Type: application/x-www-form-urlencoded
 
 username=admin&password=FALSCH
 
-### Vorhandenes Buch aktualisieren
-PUT {{restUrl}}/buecher/00000000-0000-0000-0000-000000000003
+### Vorhandenes Auto aktualisieren
+PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 If-Match: "0"
 
-< .\json\buch-3-put.json
+< .\json\auto-3-put.json
 
-### NICHT-Vorhandenes Buch aktualisieren
-PUT {{restUrl}}/buecher/99999999-9999-9999-9999-999999999999
+### NICHT-Vorhandenes Auto aktualisieren
+PUT {{restUrl}}/autos/99999999-9999-9999-9999-999999999999
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 If-Match: "0"
 
-< .\json\buch-3-put.json
+< .\json\auto-3-put.json
 
-### Vorhandenes Buch *OHNE* Versionsnummer aktualisieren
-PUT {{restUrl}}/buecher/00000000-0000-0000-0000-000000000003
+### Vorhandenes Auto *OHNE* Versionsnummer aktualisieren
+PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-3-put.json
+< .\json\auto-3-put.json
 
-### Vorhandenes Buch mit falscher Versionsnummer aktualisieren
-PUT {{restUrl}}/buecher/00000000-0000-0000-0000-000000000003
+### Vorhandenes Auto mit falscher Versionsnummer aktualisieren
+PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 If-Match: 0
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-3-put.json
+< .\json\auto-3-put.json
 
-### Vorhandenes Buch mit alter Versionsnummer aktualisieren
-PUT {{restUrl}}/buecher/00000000-0000-0000-0000-000000000003
+### Vorhandenes Auto mit alter Versionsnummer aktualisieren
+PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 If-Match: "-1"
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-3-put.json
+< .\json\auto-3-put.json
 
-### Vorhandenes Buch mit ungueltigen Daten aktualisieren
-PUT {{restUrl}}/buecher/00000000-0000-0000-0000-000000000003
+### Vorhandenes Auto mit ungueltigen Daten aktualisieren
+PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 If-Match: "0"
 
-< .\json\buch-3-put-invalid.json
+< .\json\auto-3-put-invalid.json

@@ -1,9 +1,9 @@
 {
   "_id": "00000000-0000-0000-0000-000000000003",
-  "titel": "?!",
+  "modell": "?!",
   "rating": 5,
   "art": "KINDLE",
-  "verlag": "IWI_VERLAG",
+  "produzent": "IWI_VERLAG",
   "preis": 9999,
   "rabatt": 1,
   "lieferbar": true,

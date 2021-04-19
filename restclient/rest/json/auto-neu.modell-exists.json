@@ -1,8 +1,8 @@
 {
-  "titel": "Alpha",
+  "modell": "Alpha",
   "rating": 1,
   "art": "KINDLE",
-  "verlag": "FOO_VERLAG",
+  "produzent": "FOO_VERLAG",
   "preis": 99.9,
   "rabatt": 0.1,
   "lieferbar": true,
@@ -10,7 +10,7 @@
   "isbn": "0-0070-0644-6",
   "homepage": "https://test.de/",
   "schlagwoerter": ["JAVASCRIPT", "TYPESCRIPT"],
-  "autoren": [
+  "produktionswerken": [
     {
       "vorname": "Theo",
       "nachname": "Test"

@@ -17,31 +17,31 @@
 // N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
 //
 
-### Suche alle Buecher
+### Suche alle Autos
 GET {{restUrl}}
 
-### Suche mit vorhandener Buch-ID
+### Suche mit vorhandener Auto-ID
 GET {{restUrl}}/00000000-0000-0000-0000-000000000001
 
-### Suche mit vorhandener Buch-ID und Versionsnummer
+### Suche mit vorhandener Auto-ID und Versionsnummer
 GET {{restUrl}}/00000000-0000-0000-0000-000000000001
 If-None-Match: "0"
 
-### Suche mit vorhandener Buch-ID und falscher Versionsnummer
+### Suche mit vorhandener Auto-ID und falscher Versionsnummer
 GET {{restUrl}}/00000000-0000-0000-0000-000000000001
 If-None-Match: 0
 
-### Suche mit ungueltiger Buch-ID
+### Suche mit ungueltiger Auto-ID
 GET {{restUrl}}/YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY
 
-### Suche mit nicht-vorhandener Buch-ID
+### Suche mit nicht-vorhandener Auto-ID
 GET {{restUrl}}/99999999-9999-9999-9999-999999999999
 
-### Suche mit vorhandenem Titel
-GET {{restUrl}}?titel=a
+### Suche mit vorhandenem Modell
+GET {{restUrl}}?modell=a
 
-### Suche mit nicht-vorhandenem Titel
-GET {{restUrl}}?titel=xxx
+### Suche mit nicht-vorhandenem Modell
+GET {{restUrl}}?modell=xxx
 
 ### Suche mit vorhandener ISBN
 GET {{restUrl}}?isbn=978-3897225831
@@ -55,14 +55,14 @@ GET {{restUrl}}?javascript=true
 ### Suche mit vorhandenem Schlagwort "TYPESCRIPT"
 GET {{restUrl}}?typescript=true
 
-### Suche mit gueltiger Buchart
+### Suche mit gueltiger Autoart
 GET {{restUrl}}?art=KINDLE
 
 ### Suche mit gueltigem Rating
 GET {{restUrl}}?rating=1
 
-### Suche lieferbare Buecher
+### Suche lieferbare Autos
 GET {{restUrl}}?lieferbar=true
 
-### Optionen zu Buch-ID
+### Optionen zu Auto-ID
 OPTIONS {{restUrl}}/00000000-0000-0000-0000-000000000001

@@ -17,55 +17,55 @@
 // N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
 //
 
-### Suche id, titel, art und version von allen Buechern
+### Suche id, modell, art und version von allen Autosn
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  buecher {
+  autos {
     id
-    titel
+    modell
     art
     version
   }
 }
 
-### Suche titel, art, isbn und version von einem Buch mit vorhandener Buch-ID
+### Suche modell, art, isbn und version von einem Auto mit vorhandener Auto-ID
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  buch(id: "00000000-0000-0000-0000-000000000001") {
-    titel
+  auto(id: "00000000-0000-0000-0000-000000000001") {
+    modell
     art
     isbn
     version
   }
 }
 
-### Suche titel und art von Buechern mit vorhandenem Titel
+### Suche modell und art von Autosn mit vorhandenem Modell
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  buecher(titel: "Alpha") {
-    titel
+  autos(modell: "Alpha") {
+    modell
     art
   }
 }
 
 
-### Suche titel, art und schlagwoerter von Buechern mit vorhandenem Titel
+### Suche modell, art und schlagwoerter von Autosn mit vorhandenem Modell
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  buecher(titel: "a") {
-    titel
+  autos(modell: "a") {
+    modell
     art
     schlagwoerter
   }
