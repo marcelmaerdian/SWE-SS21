@@ -20,7 +20,7 @@ import { HttpStatus, nodeConfig } from '../../../src/shared';
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import fetch, { Headers, Request } from 'node-fetch';
 import type { AddressInfo } from 'net';
-import type { Buch } from '../../../src/buch/entity';
+import type { Auto } from '../../../src/auto/entity';
 import { PATHS } from '../../../src/app';
 import RE2 from 're2';
 import type { Server } from 'http';
@@ -40,45 +40,45 @@ const { expect } = chai;
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const neuesBuch: Buch = {
-    titel: 'Neu',
+const neuesAuto: Auto = {
+    model: 'Neu',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    verlag: 'FOO_VERLAG',
+    produzent: 'FOO_PRODUZENT',
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
     datum: '2016-02-28',
-    isbn: '0-0070-0644-6',
+    seriennummer: '0-0070-0644-6',
     homepage: 'https://test.de/',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
-    autoren: [{ nachname: 'Test', vorname: 'Theo' }],
+    produktionswerke: [{ nachname: 'Test', vorname: 'Theo' }],
 };
-const neuesBuchInvalid: object = {
-    titel: 'Blabla',
+const neuesAutoInvalid: object = {
+    model: 'Blabla',
     rating: -1,
     art: 'UNSICHTBAR',
-    verlag: 'NO_VERLAG',
+    produzent: 'NO_PRODUZENT',
     preis: 0,
     rabatt: 0,
     lieferbar: true,
     datum: '12345-123-123',
-    isbn: 'falsche-ISBN',
-    autoren: [{ nachname: 'Test', vorname: 'Theo' }],
+    seriennummer: 'falsche-SERIENNUMMER',
+    produktionswerke: [{ nachname: 'Test', vorname: 'Theo' }],
     schlagwoerter: [],
 };
-const neuesBuchTitelExistiert: Buch = {
-    titel: 'Alpha',
+const neuesAutoModelExistiert: Auto = {
+    model: 'Alpha',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    verlag: 'FOO_VERLAG',
+    produzent: 'FOO_PRODUZENT',
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
     datum: '2016-02-28',
-    isbn: '0-0070-9732-8',
+    seriennummer: '0-0070-9732-8',
     homepage: 'https://test.de/',
-    autoren: [{ nachname: 'Test', vorname: 'Theo' }],
+    produktionswerke: [{ nachname: 'Test', vorname: 'Theo' }],
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
 };
 
@@ -86,19 +86,19 @@ const neuesBuchTitelExistiert: Buch = {
 // T e s t s
 // -----------------------------------------------------------------------------
 let server: Server;
-const path = PATHS.buecher;
-let buecherUri: string;
+const path = PATHS.autos;
+let autosUri: string;
 let loginUri: string;
 
 // Test-Suite
-describe('POST /api/buecher', () => {
+describe('POST /api/autos', () => {
     // Testserver starten und dabei mit der DB verbinden
     beforeAll(async () => {
         server = await createTestserver();
 
         const address = server.address() as AddressInfo;
         const baseUri = `https://${nodeConfig.host}:${address.port}`;
-        buecherUri = `${baseUri}${path}`;
+        autosUri = `${baseUri}${path}`;
         loginUri = `${baseUri}${PATHS.login}`;
     });
 
@@ -108,7 +108,7 @@ describe('POST /api/buecher', () => {
         server.close();
     });
 
-    test('Neues Buch', async () => {
+    test('Neues Auto', async () => {
         // given
         const token = await login(loginUri);
 
@@ -116,8 +116,8 @@ describe('POST /api/buecher', () => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(neuesBuch);
-        const request = new Request(buecherUri, {
+        const body = JSON.stringify(neuesAuto);
+        const request = new Request(autosUri, {
             method: HttpMethod.POST,
             headers,
             body,
@@ -150,15 +150,15 @@ describe('POST /api/buecher', () => {
         expect(responseBody).to.be.empty;
     });
 
-    test('Neues Buch mit ungueltigen Daten', async () => {
+    test('Neues Auto mit ungueltigen Daten', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(neuesBuchInvalid);
-        const request = new Request(buecherUri, {
+        const body = JSON.stringify(neuesAutoInvalid);
+        const request = new Request(autosUri, {
             method: HttpMethod.POST,
             headers,
             body,
@@ -170,30 +170,30 @@ describe('POST /api/buecher', () => {
 
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
-        const { art, rating, verlag, datum, isbn } = await response.json();
+        const { art, rating, produzent, datum, seriennummer } = await response.json();
 
         expect(art).to.be.equal(
-            'Die Art eines Buches muss KINDLE oder DRUCKAUSGABE sein.',
+            'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.',
         );
         expect(rating).to.be.equal(
             'Eine Bewertung muss zwischen 0 und 5 liegen.',
         );
-        expect(verlag).to.be.equal(
-            'Der Verlag eines Buches muss FOO_VERLAG oder BAR_VERLAG sein.',
+        expect(produzent).to.be.equal(
+            'Der Produzent eines Autoes muss FOO_PRODUZENT oder BAR_PRODUZENT sein.',
         );
         expect(datum).to.be.equal('Das Datum muss im Format yyyy-MM-dd sein.');
-        expect(isbn).to.be.equal('Die ISBN-Nummer ist nicht korrekt.');
+        expect(seriennummer).to.be.equal('Die SERIENNUMMER-Nummer ist nicht korrekt.');
     });
 
-    test('Neues Buch, aber der Titel existiert bereits', async () => {
+    test('Neues Auto, aber der Model existiert bereits', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(neuesBuchTitelExistiert);
-        const request = new Request(buecherUri, {
+        const body = JSON.stringify(neuesAutoModelExistiert);
+        const request = new Request(autosUri, {
             method: HttpMethod.POST,
             headers,
             body,
@@ -206,14 +206,14 @@ describe('POST /api/buecher', () => {
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
         const responseBody = await response.text();
-        expect(responseBody).has.string('Titel');
+        expect(responseBody).has.string('Model');
     });
 
-    test('Neues Buch, aber ohne Token', async () => {
+    test('Neues Auto, aber ohne Token', async () => {
         // given
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        const body = JSON.stringify(neuesBuchTitelExistiert);
-        const request = new Request(buecherUri, {
+        const body = JSON.stringify(neuesAutoModelExistiert);
+        const request = new Request(autosUri, {
             method: HttpMethod.POST,
             headers,
             body,
@@ -229,15 +229,15 @@ describe('POST /api/buecher', () => {
         expect(responseBody).to.be.equalIgnoreCase('unauthorized');
     });
 
-    test('Neues Buch, aber mit falschem Token', async () => {
+    test('Neues Auto, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         const headers = new Headers({
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(neuesBuch);
-        const request = new Request(buecherUri, {
+        const body = JSON.stringify(neuesAuto);
+        const request = new Request(autosUri, {
             method: HttpMethod.POST,
             headers,
             body,

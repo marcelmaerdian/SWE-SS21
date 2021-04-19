@@ -16,21 +16,24 @@
  */
 
 /**
- * Das Modul enthält die Funktionen für EJS einschließlich für die Startseite.
+ * Das Modul besteht aus der Suchfunktion für EJS.
  * @packageDocumentation
  */
 
 import type { Request, Response } from 'express';
+import { AutoService } from '../service/auto.service';
+import { logger } from './../../shared/logger';
+
+const autoService = new AutoService();
 
 /**
- * Funktion für EJS für die Startseite ("index").
+ * Asynchrone Suchfunktion für EJS, um alle Bücher zu suchen.
  *
  * @param req Request-Objekt von Express mit der URL für EJS
  * @param res Response-Objekt von Express
  */
-export const index = (_: Request, res: Response) => {
-    res.render('index', { title: 'Beispiel' });
+export const suche = async (req: Request, res: Response) => {
+    logger.error('suche(): %s', req.url);
+    const autos = await autoService.find();
+    res.render('suche', { title: 'Suche', autos });
 };
-
-export * from './neues-buch';
-export * from './suche';

@@ -18,28 +18,28 @@
 /**
  * Handler-Funktionen, um die REST-Schnittstelle mit Express zu realisieren. Die
  * einzelnen Handler-Funktionen delegieren an die jeweiligen Methoden der Klassen
- * {@linkcode BuchRequestHandler} und {@linkcode BuchFileRequestHandler}.
+ * {@linkcode AutoRequestHandler} und {@linkcode AutoFileRequestHandler}.
  * @packageDocumentation
  */
 
 import type { Request, Response } from 'express';
-import { BuchFileRequestHandler } from './buch-file.request-handler';
-import { BuchRequestHandler } from './buch.request-handler';
+import { AutoFileRequestHandler } from './auto-file.request-handler';
+import { AutoRequestHandler } from './auto.request-handler';
 
-const handler = new BuchRequestHandler();
-const fileHandler = new BuchFileRequestHandler();
+const handler = new AutoRequestHandler();
+const fileHandler = new AutoFileRequestHandler();
 
 /**
- * Ein Buch wird asynchron anhand seiner ID als Pfadparameter gesucht.
+ * Ein Auto wird asynchron anhand seiner ID als Pfadparameter gesucht.
  *
- * Falls es ein solches Buch gibt und `If-None-Match` im Request-Header
- * auf die aktuelle Version des Buches gesetzt war, wird der Statuscode
+ * Falls es ein solches Auto gibt und `If-None-Match` im Request-Header
+ * auf die aktuelle Version des Autoes gesetzt war, wird der Statuscode
  * `304` (`Not Modified`) zurückgeliefert. Falls `If-None-Match` nicht
  * gesetzt ist oder eine veraltete Version enthält, wird das gefundene
- * Buch im Rumpf des Response als JSON-Datensatz mit Atom-Links für HATEOAS
+ * Auto im Rumpf des Response als JSON-Datensatz mit Atom-Links für HATEOAS
  * und dem Statuscode `200` (`OK`) zurückgeliefert.
  *
- * Falls es kein Buch zur angegebenen ID gibt, wird der Statuscode `404`
+ * Falls es kein Auto zur angegebenen ID gibt, wird der Statuscode `404`
  * (`Not Found`) zurückgeliefert.
  *
  * @param req Request-Objekt von Express.
@@ -51,11 +51,11 @@ export const findById = (req: Request, res: Response) =>
 
 /**
  * Bücher werden mit Query-Parametern asynchron gesucht. Falls es mindestens
- * ein solches Buch gibt, wird der Statuscode `200` (`OK`) gesetzt. Im Rumpf
+ * ein solches Auto gibt, wird der Statuscode `200` (`OK`) gesetzt. Im Rumpf
  * des Response ist das JSON-Array mit den gefundenen Büchern, die jeweils
  * um Atom-Links für HATEOAS ergänzt sind.
  *
- * Falls es kein Buch zu den Suchkriterien gibt, wird der Statuscode `404`
+ * Falls es kein Auto zu den Suchkriterien gibt, wird der Statuscode `404`
  * (`Not Found`) gesetzt.
  *
  * Falls es keine Query-Parameter gibt, werden alle Bücher ermittelt.
@@ -67,15 +67,15 @@ export const findById = (req: Request, res: Response) =>
 export const find = (req: Request, res: Response) => handler.find(req, res);
 
 /**
- * Ein neues Buch wird asynchron angelegt. Das neu anzulegende Buch ist als
+ * Ein neues Auto wird asynchron angelegt. Das neu anzulegende Auto ist als
  * JSON-Datensatz im Request-Objekt enthalten und im Request-Header muss
  * `Content-Type` auf `application\json` gesetzt sein. Wenn es keine
  * Verletzungen von Constraints gibt, wird der Statuscode `201` (`Created`)
  * gesetzt und im Response-Header wird `Location` auf die URI so gesetzt,
- * dass damit das neu angelegte Buch abgerufen werden kann.
+ * dass damit das neu angelegte Auto abgerufen werden kann.
  *
  * Falls Constraints verletzt sind, wird der Statuscode `400` (`Bad Request`)
- * gesetzt und genauso auch wenn der Titel oder die ISBN-Nummer bereits
+ * gesetzt und genauso auch wenn der Modell oder die SERIENNUMMER-Nummer bereits
  * existieren.
  *
  * @param req Request-Objekt von Express.
@@ -85,11 +85,11 @@ export const find = (req: Request, res: Response) => handler.find(req, res);
 export const create = (req: Request, res: Response) => handler.create(req, res);
 
 /**
- * Ein vorhandenes Buch wird asynchron aktualisiert.
+ * Ein vorhandenes Auto wird asynchron aktualisiert.
  *
- * Im Request-Objekt von Express muss die ID des zu aktualisierenden Buches
+ * Im Request-Objekt von Express muss die ID des zu aktualisierenden Autoes
  * als Pfad-Parameter enthalten sein. Außerdem muss im Rumpf das zu
- * aktualisierende Buch als JSON-Datensatz enthalten sein. Damit die
+ * aktualisierende Auto als JSON-Datensatz enthalten sein. Damit die
  * Aktualisierung überhaupt durchgeführt werden kann, muss im Header
  * `If-Match` auf die korrekte Version für optimistische Synchronisation
  * gesetzt sein.
@@ -101,7 +101,7 @@ export const create = (req: Request, res: Response) => handler.create(req, res);
  * required`) gesetzt; und falls sie nicht korrekt ist, der Statuscode `412`
  * (`Precondition failed`). Falls Constraints verletzt sind, wird der
  * Statuscode `400` (`Bad Request`) gesetzt und genauso auch wenn der neue
- * Titel oder die neue ISBN-Nummer bereits existieren.
+ * Modell oder die neue SERIENNUMMER-Nummer bereits existieren.
  *
  * @param req Request-Objekt von Express.
  * @param res Leeres Response-Objekt von Express.
@@ -110,7 +110,7 @@ export const create = (req: Request, res: Response) => handler.create(req, res);
 export const update = (req: Request, res: Response) => handler.update(req, res);
 
 /**
- * Ein Buch wird anhand seiner ID-gelöscht, die als Pfad-Parameter angegeben
+ * Ein Auto wird anhand seiner ID-gelöscht, die als Pfad-Parameter angegeben
  * ist. Der zurückgelieferte Statuscode ist `204` (`No Content`).
  *
  * @param req Request-Objekt von Express.
@@ -121,10 +121,10 @@ export const deleteFn = (req: Request, res: Response) =>
     handler.delete(req, res);
 
 /**
- * Zu einem vorhandenen Buch wird eine Binärdatei mit z.B. einem Bild oder
+ * Zu einem vorhandenen Auto wird eine Binärdatei mit z.B. einem Bild oder
  * einem Video hochgeladen.
  *
- * Im Request-Objekt von Express muss die ID des zu betreffenden Buches
+ * Im Request-Objekt von Express muss die ID des zu betreffenden Autoes
  * als Pfad-Parameter enthalten sein. Außerdem muss im Rumpf die Binärdatei
  * enthalten sein. Bei erfolgreicher Durchführung wird der Statuscode `204`
  * (`No Content`) gesetzt.
@@ -136,14 +136,14 @@ export const upload = (req: Request, res: Response) =>
     fileHandler.upload(req, res);
 
 /**
- * Zu einem vorhandenen Buch wird eine Binärdatei mit z.B. einem Bild oder
+ * Zu einem vorhandenen Auto wird eine Binärdatei mit z.B. einem Bild oder
  * einem Video asynchron heruntergeladen. Im Request-Objekt von Express muss
- * die ID des zu betreffenden Buches als Pfad-Parameter enthalten sein.
+ * die ID des zu betreffenden Autoes als Pfad-Parameter enthalten sein.
  *
  * Bei erfolgreicher Durchführung wird der Statuscode `200` (`OK`) gesetzt.
- * Falls es kein Buch mit der angegebenen ID gibt, wird der Statuscode `412`
- * (`Precondition Failed`) gesetzt. Wenn es das Buch zur angegebenen ID zwar
- * gibt, aber zu diesem Buch keine Binärdatei existiert, dann wird der
+ * Falls es kein Auto mit der angegebenen ID gibt, wird der Statuscode `412`
+ * (`Precondition Failed`) gesetzt. Wenn es das Auto zur angegebenen ID zwar
+ * gibt, aber zu diesem Auto keine Binärdatei existiert, dann wird der
  * Statuscode `404` (`Not Found`) gesetzt.
  *
  * @param req Request-Objekt von Express.

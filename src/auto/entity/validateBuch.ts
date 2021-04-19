@@ -19,14 +19,14 @@
 
 /**
  * Das Modul besteht aus dem Typ {@linkcode ValidationErrorMsg} und der
- * Funktion {@linkcode validateBuch} sowie notwendigen Konstanten.
+ * Funktion {@linkcode validateAuto} sowie notwendigen Konstanten.
  * @packageDocumentation
  */
 
 // https://ajv.js.org/guide/schema-language.html#draft-2019-09-and-draft-2012-12
 // https://github.com/ajv-validator/ajv/blob/master/docs/validation.md
 import Ajv2020 from 'ajv/dist/2020';
-import type { Buch } from './buch';
+import type { Auto } from './auto';
 import { jsonSchema } from './jsonSchema';
 import { logger } from '../../shared';
 
@@ -49,20 +49,20 @@ export type ValidationErrorMsg = Record<string, string | undefined>;
  * Funktion zur Validierung, wenn neue Bücher angelegt oder vorhandene Bücher
  * aktualisiert bzw. überschrieben werden sollen.
  */
-export const validateBuch = (buch: Buch) => {
-    const validate = ajv.compile<Buch>(jsonSchema);
-    validate(buch);
+export const validateAuto = (auto: Auto) => {
+    const validate = ajv.compile<Auto>(jsonSchema);
+    validate(auto);
     // nullish coalescing
     const errors = validate.errors ?? [];
-    logger.debug('validateBuch: errors=%o', errors);
+    logger.debug('validateAuto: errors=%o', errors);
     const errorMsg: ValidationErrorMsg = {};
     errors.forEach((err) => {
         const { instancePath } = err;
         // eslint-disable-next-line default-case
         switch (instancePath) {
-            case '/titel':
-                errorMsg.titel =
-                    'Ein Buchtitel muss mit einem Buchstaben, einer Ziffer oder _ beginnen.';
+            case '/modell':
+                errorMsg.modell =
+                    'Ein Automodell muss mit einem Autostaben, einer Ziffer oder _ beginnen.';
                 break;
             case '/rating':
                 errorMsg.rating =
@@ -70,11 +70,11 @@ export const validateBuch = (buch: Buch) => {
                 break;
             case '/art':
                 errorMsg.art =
-                    'Die Art eines Buches muss KINDLE oder DRUCKAUSGABE sein.';
+                    'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.';
                 break;
-            case '/verlag':
-                errorMsg.verlag =
-                    'Der Verlag eines Buches muss FOO_VERLAG oder BAR_VERLAG sein.';
+            case '/produzent':
+                errorMsg.produzent =
+                    'Der Produzent eines Autoes muss FOO_PRODUZENT oder BAR_PRODUZENT sein.';
                 break;
             case '/preis':
                 errorMsg.preis = 'Der Preis darf nicht negativ sein.';
@@ -90,8 +90,8 @@ export const validateBuch = (buch: Buch) => {
             case '/datum':
                 errorMsg.datum = 'Das Datum muss im Format yyyy-MM-dd sein.';
                 break;
-            case '/isbn':
-                errorMsg.isbn = 'Die ISBN-Nummer ist nicht korrekt.';
+            case '/seriennummer':
+                errorMsg.seriennummer = 'Die SERIENNUMMER-Nummer ist nicht korrekt.';
                 break;
             case '/homepage':
                 errorMsg.homepage = 'Die Homepage ist nicht korrekt.';
@@ -99,6 +99,6 @@ export const validateBuch = (buch: Buch) => {
         }
     });
 
-    logger.debug('validateBuch: errorMsg=%o', errorMsg);
+    logger.debug('validateAuto: errorMsg=%o', errorMsg);
     return Object.entries(errorMsg).length === 0 ? undefined : errorMsg;
 };

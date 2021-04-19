@@ -17,8 +17,10 @@ interface BuchData <<entity>> {
     + autoren: any
   }
 
-
-
+isbn->seriennummer
+verlag->produzent
+autoren->produktionswerke
+titel->modell
 
 
 Hier werden all unsere Dokumentationsschritte veröffentlicht.
@@ -73,3 +75,4 @@ Maxi -> backend und kustomize
 Marcel -> restlcient und scripts
 Rouven -> src und test
 Yannick -> alle Dateien
+

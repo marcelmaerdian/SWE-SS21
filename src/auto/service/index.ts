@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,12 +16,13 @@
  */
 
 /**
- * Das Modul besteht aus Interfaces, Klassen und Funktionen für Bücher als
- * _Entity_ gemäß _Domain Driven Design_. Dazu gehört auch die Validierung.
+ * Das Modul besteht aus den Klassen {@linkcode AutoFileService} und
+ * {@linkcode AutoService}, um Bücher und ihre zugehörige Binärdateien in
+ * MongoDB abzuspeichern, auszulesen, zu ändern und zu löschen einschließlich
+ * der Klassen für die Fehlerbehandlung.
  * @packageDocumentation
  */
 
-export { Buch, BuchArt, BuchData, Verlag } from './buch';
-export { BuchDocument, BuchModel, buchSchema } from './buch.model';
-export { MAX_RATING } from './jsonSchema';
-export { ValidationErrorMsg, validateBuch } from './validateBuch';
+export * from './auto-file.service';
+export * from './auto.service';
+export * from './errors';

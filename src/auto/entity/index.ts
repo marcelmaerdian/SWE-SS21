@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,17 +16,12 @@
  */
 
 /**
- * Das Modul besteht aus der Funktion für EJS, um ein neues Buch anzulegen.
+ * Das Modul besteht aus Interfaces, Klassen und Funktionen für Bücher als
+ * _Entity_ gemäß _Domain Driven Design_. Dazu gehört auch die Validierung.
  * @packageDocumentation
  */
 
-import type { Request, Response } from 'express';
-
-/**
- * Funktion für EJS, um ein neues Buch anzulegen
- * @param _ nicht-benutztes Request-Objekt von Express
- * @param res Response-Objekt von Express
- */
-export const neuesBuch = (_: Request, res: Response) => {
-    res.render('neues-buch', { title: 'Neues Buch' });
-};
+export { Auto, AutoArt, AutoData, Produzent } from './auto';
+export { AutoDocument, AutoModell, autoSchema } from './auto.modell';
+export { MAX_RATING } from './jsonSchema';
+export { ValidationErrorMsg, validateAuto } from './validateAuto';

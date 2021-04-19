@@ -16,7 +16,7 @@
  */
 
 /**
- * Das Modul besteht aus der Klasse {@linkcode BuchFileRequestHandler}, um die
+ * Das Modul besteht aus der Klasse {@linkcode AutoFileRequestHandler}, um die
  * Handler-Funktionen für die REST-Schnittstelle auf der Basis von Express
  * gebündelt bereitzustellen, damit Binärdateien hoch- und heruntergeladen
  * werden können.
@@ -24,12 +24,12 @@
  */
 
 import {
-    BuchFileService,
-    BuchFileServiceError,
-    BuchNotExists,
+    AutoFileService,
+    AutoFileServiceError,
+    AutoNotExists,
     FileNotFound,
     MultipleFiles,
-} from './../service';
+} from '../service';
 import { HttpStatus, logger } from '../../shared';
 import type { Request, Response } from 'express';
 import type { DownloadError } from '../service';
@@ -44,14 +44,14 @@ import type { DownloadError } from '../service';
  * REST-Schnittstelle auf Basis von Express für das Hoch- und Herunterladen
  * von Binärdateien zu realisieren.
  */
-export class BuchFileRequestHandler {
-    private readonly service = new BuchFileService();
+export class AutoFileRequestHandler {
+    private readonly service = new AutoFileService();
 
     /**
-     * Zu einem vorhandenen Buch wird eine Binärdatei mit z.B. einem Bild oder
+     * Zu einem vorhandenen Auto wird eine Binärdatei mit z.B. einem Bild oder
      * einem Video hochgeladen.
      *
-     * Im Request-Objekt von Express muss die ID des zu betreffenden Buches
+     * Im Request-Objekt von Express muss die ID des zu betreffenden Autoes
      * als Pfad-Parameter enthalten sein. Außerdem muss im Rumpf die Binärdatei
      * enthalten sein. Bei erfolgreicher Durchführung wird der Statuscode `204`
      * (`No Content`) gesetzt.
@@ -61,7 +61,7 @@ export class BuchFileRequestHandler {
      */
     upload(req: Request, res: Response) {
         const { id } = req.params;
-        logger.debug('BuchFileRequestHandler.upload(): id=%s', id);
+        logger.debug('AutoFileRequestHandler.upload(): id=%s', id);
 
         if (id === undefined) {
             res.sendStatus(HttpStatus.INTERNAL_ERROR);
@@ -79,16 +79,16 @@ export class BuchFileRequestHandler {
 
         req.on('data', (chunk: Uint8Array) => {
             const { length } = chunk;
-            logger.debug('BuchFileRequestHandler.upload(): data %d', length);
+            logger.debug('AutoFileRequestHandler.upload(): data %d', length);
             data.push(chunk);
             totalBytesInBuffer += length;
         })
             .on('aborted', () =>
-                logger.debug('BuchFileRequestHandler.upload(): aborted'),
+                logger.debug('AutoFileRequestHandler.upload(): aborted'),
             )
             .on('end', () => {
                 logger.debug(
-                    'BuchFileRequestHandler.upload(): end %d',
+                    'AutoFileRequestHandler.upload(): end %d',
                     totalBytesInBuffer,
                 );
                 const buffer = Buffer.concat(data, totalBytesInBuffer);
@@ -111,14 +111,14 @@ export class BuchFileRequestHandler {
     }
 
     /**
-     * Zu einem vorhandenen Buch wird eine Binärdatei mit z.B. einem Bild oder
+     * Zu einem vorhandenen Auto wird eine Binärdatei mit z.B. einem Bild oder
      * einem Video asynchron heruntergeladen. Im Request-Objekt von Express muss
-     * die ID des zu betreffenden Buches als Pfad-Parameter enthalten sein.
+     * die ID des zu betreffenden Autoes als Pfad-Parameter enthalten sein.
      *
      * Bei erfolgreicher Durchführung wird der Statuscode `200` (`OK`) gesetzt.
-     * Falls es kein Buch mit der angegebenen ID gibt, wird der Statuscode `412`
-     * (`Precondition Failed`) gesetzt. Wenn es das Buch zur angegebenen ID zwar
-     * gibt, aber zu diesem Buch keine Binärdatei existiert, dann wird der
+     * Falls es kein Auto mit der angegebenen ID gibt, wird der Statuscode `412`
+     * (`Precondition Failed`) gesetzt. Wenn es das Auto zur angegebenen ID zwar
+     * gibt, aber zu diesem Auto keine Binärdatei existiert, dann wird der
      * Statuscode `404` (`Not Found`) gesetzt.
      *
      * @param req Request-Objekt von Express.
@@ -127,7 +127,7 @@ export class BuchFileRequestHandler {
      */
     async download(req: Request, res: Response) {
         const { id } = req.params;
-        logger.debug('BuchFileRequestHandler.downloadBinary(): %s', id);
+        logger.debug('AutoFileRequestHandler.downloadBinary(): %s', id);
         if (id === undefined) {
             res.sendStatus(HttpStatus.INTERNAL_ERROR);
             return;
@@ -135,8 +135,8 @@ export class BuchFileRequestHandler {
 
         const findResult = await this.service.find(id);
         if (
-            findResult instanceof BuchFileServiceError ||
-            findResult instanceof BuchNotExists
+            findResult instanceof AutoFileServiceError ||
+            findResult instanceof AutoNotExists
         ) {
             this.handleDownloadError(findResult, res);
             return;
@@ -155,14 +155,14 @@ export class BuchFileRequestHandler {
     }
 
     private handleDownloadError(
-        err: BuchNotExists | DownloadError,
+        err: AutoNotExists | DownloadError,
         res: Response,
     ) {
-        if (err instanceof BuchNotExists) {
+        if (err instanceof AutoNotExists) {
             const { id } = err;
-            const msg = `Es gibt kein Buch mit der ID "${id}".`;
+            const msg = `Es gibt kein Auto mit der ID "${id}".`;
             logger.debug(
-                'BuchFileRequestHandler.handleDownloadError(): msg=%s',
+                'AutoFileRequestHandler.handleDownloadError(): msg=%s',
                 msg,
             );
             res.status(HttpStatus.PRECONDITION_FAILED)
@@ -175,7 +175,7 @@ export class BuchFileRequestHandler {
             const { filename } = err;
             const msg = `Es gibt kein File mit Name ${filename}`;
             logger.debug(
-                'BuchFileRequestHandler.handleDownloadError(): msg=%s',
+                'AutoFileRequestHandler.handleDownloadError(): msg=%s',
                 msg,
             );
             res.status(HttpStatus.NOT_FOUND).send(msg);
@@ -186,7 +186,7 @@ export class BuchFileRequestHandler {
             const { filename } = err;
             const msg = `Es gibt mehr als ein File mit Name ${filename}`;
             logger.debug(
-                'BuchFileRequestHandler.handleDownloadError(): msg=%s',
+                'AutoFileRequestHandler.handleDownloadError(): msg=%s',
                 msg,
             );
             res.status(HttpStatus.INTERNAL_ERROR).send(msg);
