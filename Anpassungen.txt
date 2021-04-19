@@ -27,7 +27,8 @@ buch    ->  auto
 --------------------------------------------------------------------------------------
 (filme ->  autos)     //wurde auch geändert oder?
 ----------------------------------------------------------------------------------------------------
-verlag  ->  hersteller
+verlag  ->  produzent
+verlage -> produzenten
 autoren ->  produtkionswerke
 autor   ->  produktionswerk
 druckausgabe -> ?? 
