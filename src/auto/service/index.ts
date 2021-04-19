@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { exec } from 'shelljs';
+/**
+ * Das Modul besteht aus den Klassen {@linkcode AutoFileService} und
+ * {@linkcode AutoService}, um Bücher und ihre zugehörige Binärdateien in
+ * MongoDB abzuspeichern, auszulesen, zu ändern und zu löschen einschließlich
+ * der Klassen für die Fehlerbehandlung.
+ * @packageDocumentation
+ */
 
-const dockerAccount = 'juergenzimmermann';
-const imageName = 'auto';
-const imageTag = '1.0.0';
-
-const image = `docker.io/${dockerAccount}/${imageName}:${imageTag}`;
-
-// Dockerfile im aktuellen Verzeichnis
-// Download der diversen Layer fuer node:x.y.z-buster und distroless/nodejs
-exec(`docker build --tag ${image} .`);
+export * from './auto-file.service';
+export * from './auto.service';
+export * from './errors';

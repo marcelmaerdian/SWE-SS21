@@ -16,56 +16,59 @@
 //
 // N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
 //
-// Introspection beim Apollo Server: Metadaten ueber die verfuegbaren Typen
-// https://graphql.org/learn/introspection
 
-### Welche Typen sind verfuegbar?
+### Neues Auto anlegen
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
-{
-  __schema {
-    types {
-      name
-    }
-  }
+mutation {
+  createAuto(
+    modell: "Test",
+    rating: 1,
+    art: "KINDLE",
+    produzent: "FOO_VERLAG",
+    preis: 11.1,
+    rabatt: 0.011,
+    lieferbar: true,
+    datum: "2021-01-31",
+    isbn: "3-89722-583-2",
+    homepage: "http://acme.com",
+    schlagwoerter: ["JAVASCRIPT"]
+  )
 }
 
-### Details zum Typ "Auto": Felder und deren Typen
+### Vorhandenes Auto aktualisieren
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
-{
-  __type(name: "Auto") {
-    name
-    kind
-    description
-    fields {
-      name
-      type {
-        name
-        kind
-        ofType {
-          name
-          kind
-          description
-        }
-      }
-    }
-  }
+mutation {
+  updateAuto(
+    _id: "00000000-0000-0000-0000-000000000003",
+    modell: "Geaendert",
+    rating: 5,
+    art: "DRUCKAUSGABE",
+    produzent: "FOO_VERLAG",
+    preis: 99.99,
+    rabatt: 0.099,
+    lieferbar: false,
+    datum: "2021-01-02",
+    isbn: "3-8273-1552-2",
+    homepage: "https://acme.com",
+    schlagwoerter: [
+      "JAVASCRIPT",
+      "TYPESCRIPT"
+    ],
+    version: 1
+  )
 }
 
-### Details zum Enum-Typ "Art"
+### Vorhandenes Auto loeschen
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
-{
-  __type(name: "Art") {
-    name
-    kind
-    description
-  }
+mutation {
+  deleteAuto(id: "00000000-0000-0000-0000-000000000004")
 }

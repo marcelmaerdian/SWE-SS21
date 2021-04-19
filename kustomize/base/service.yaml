@@ -19,11 +19,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: buch
+  name: auto
   labels:
-    app: buch
+    app: auto
 spec:
   selector:
-    app: buch
+    app: auto
   ports:
     - port: 3000
