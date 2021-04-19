@@ -17,8 +17,8 @@ interface BuchData <<entity>> {
     + autoren: any
   }
 
-auto.model.ts
+
   isbn->seriennummer
-  verlag->hersteller
+  verlag->produzent
   autoren->produktionswerke
-  titel->model
+  titel->modell
