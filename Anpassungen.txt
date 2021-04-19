@@ -17,8 +17,62 @@ interface BuchData <<entity>> {
     + autoren: any
   }
 
+isbn->seriennummer
+verlag->produzent
+autoren->produktionswerke
+titel->modell
 
-  isbn->seriennummer
-  verlag->produzent
-  autoren->produktionswerke
-  titel->modell
+
+Hier werden all unsere Dokumentationsschritte veröffentlicht.
+----------------------------------------------------------------------------------------------------
+buch    ->  auto
+--------------------------------------------------------------------------------------
+(filme ->  autos)     //wurde auch geändert oder?
+----------------------------------------------------------------------------------------------------
+verlag  ->  produzent
+verlage -> produzenten
+autoren ->  produtkionswerke
+autor   ->  produktionswerk
+druckausgabe -> ?? 
+kindle  ->  ??
+prodnr    ->  seriennummer
+titel   ->  model
+preis   ->  preis
+--------------------------------------------------------------------------------------
+/html/index.ts
+./neuer-film -> ./neuer-film
+/html/neuer-film.ts
+Dateinamenänderung neuer-film.ts -> neuer-film.ts
+neuesBuch -> neuerFilm
+neues-film -> neuer-film
+Neues Film -> Neuer Film
+/html/suche.ts
+BuchService -> FilmService
+buchService -> filmService
+/rest/film-file.request-handler.ts
+BuchFileService -> FilmFileService
+BuchFileServiceError -> FilmFileServiceError
+BuchNotExists -> FilmNotExists
+BuchFileRequestHandler -> FilmFileRequestHandler
+kein Film -> keinen Film
+/rest/film.request-handler.ts
+BuchData -> FilmData
+BuchInvalid -> FilmInvalid
+BuchServiceError -> FilmServiceError
+BuchRequestHandler -> FilmRequestHandler
+buchData -> filmData
+buchSaved -> filmSaved
+----------------------------------------------------------------------------------------------------
+FOO_PRODUKTION -> Volkswagen
+NO_PRODUKTION -> Ford
+BAR_PRODUKTION -> Mercedes
+
+----------------------------------------------------------------------------------------------------
+
+Aufteilung:
+
+Maxi -> backend und kustomize
+Marcel -> restlcient und scripts
+Rouven -> src und test
+Yannick -> alle Dateien
+
