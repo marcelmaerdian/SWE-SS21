@@ -20,7 +20,7 @@ kind: Kustomization
 namespace: acme
 
 configMapGenerator:
-  - name: buch-env
+  - name: auto-env
     literals:
       - TZ=Europe/Berlin
 
