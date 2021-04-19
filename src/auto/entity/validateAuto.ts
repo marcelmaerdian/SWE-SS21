@@ -91,7 +91,7 @@ export const validateAuto = (auto: Auto) => {
                 errorMsg.datum = 'Das Datum muss im Format yyyy-MM-dd sein.';
                 break;
             case '/seriennummer':
-                errorMsg.seriennummer = 'Die SERIENNUMMER-Nummer ist nicht korrekt.';
+                errorMsg.seriennummer = 'Die Seriennummer ist nicht korrekt.';
                 break;
             case '/homepage':
                 errorMsg.homepage = 'Die Homepage ist nicht korrekt.';

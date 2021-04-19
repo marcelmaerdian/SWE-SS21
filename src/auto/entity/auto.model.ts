@@ -21,9 +21,9 @@
  */
 
 import type { Auto, AutoArt, Produzent } from './auto';
-import { Document, Schema, SchemaType, modell } from 'mongoose';
+import { Document, Schema, SchemaType, model } from 'mongoose';
 import { autoIndex, logColorConsole } from '../../shared';
-import type { Modell } from 'mongoose';
+import type { Model } from 'mongoose';
 // RFC version 1: timestamps            https://github.com/uuidjs/uuid#uuidv1options-buffer-offset
 // RFC version 3: namespace mit MD5     https://github.com/uuidjs/uuid#uuidv3name-namespace-buffer-offset
 // RFC version 4: random                https://github.com/uuidjs/uuid#uuidv4options-buffer-offset
@@ -82,7 +82,7 @@ export class AutoDocument extends Document<string> implements Auto {
  * Das Schema für Mongoose, das dem Schema bei einem relationalen DB-System
  * entspricht, welches durch `CREATE TABLE`, `CREATE INDEX` usw. entsteht.
  */
-export const autoSchema = new Schema<AutoDocument, Modell<AutoDocument>>(
+export const autoSchema = new Schema<AutoDocument, Model<AutoDocument>>(
     {
         // MongoDB erstellt implizit einen Index fuer _id
         // mongoose-id-assigner hat geringe Download-Zahlen und
@@ -103,7 +103,12 @@ export const autoSchema = new Schema<AutoDocument, Modell<AutoDocument>>(
         rabatt: Number,
         lieferbar: Boolean,
         datum: Date,
-        seriennummer: { type: String, required: true, unique: true, immutable: true },
+        seriennummer: {
+            type: String,
+            required: true,
+            unique: true,
+            immutable: true,
+        },
         homepage: String,
         schlagwoerter: { type: [String], sparse: true },
         // "anything goes"
@@ -124,7 +129,7 @@ export const autoSchema = new Schema<AutoDocument, Modell<AutoDocument>>(
 // Optimistische Synchronisation durch das Feld __v fuer die Versionsnummer
 // https://mongoosejs.com/docs/guide.html#versionKey
 // https://github.com/Automattic/mongoose/issues/1265
-const optimistic = (schema: Schema<AutoDocument, Modell<AutoDocument>>) => {
+const optimistic = (schema: Schema<AutoDocument, Model<AutoDocument>>) => {
     schema.pre('findOneAndUpdate', function () {
         // UpdateQuery ist abgeleitet von ReadonlyPartial<Schema<...>>
         const update = this.getUpdate(); // eslint-disable-line @typescript-eslint/no-invalid-this
@@ -165,4 +170,4 @@ autoSchema.plugin(optimistic);
  * die Dokumente bereit, d.h. das Pattern _Active Record_ wird realisiert.
  * Der Name des Modells wird als Name für die Collection in MongoDB verwendet.
  */
-export const AutoModell = modell<AutoDocument>('Auto', autoSchema); // eslint-disable-line @typescript-eslint/naming-convention
+export const AutoModell = model<AutoDocument>('Auto', autoSchema); // eslint-disable-line @typescript-eslint/naming-convention
