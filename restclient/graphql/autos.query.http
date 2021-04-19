@@ -17,58 +17,56 @@
 // N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
 //
 
-### Neues Buch anlegen
+### Suche id, modell, art und version von allen Autosn
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
-mutation {
-  createBuch(
-    titel: "Test",
-    rating: 1,
-    art: "KINDLE",
-    verlag: "FOO_VERLAG",
-    preis: 11.1,
-    rabatt: 0.011,
-    lieferbar: true,
-    datum: "2021-01-31",
-    isbn: "3-89722-583-2",
-    homepage: "http://acme.com",
-    schlagwoerter: ["JAVASCRIPT"]
-  )
+{
+  autos {
+    id
+    modell
+    art
+    version
+  }
 }
 
-### Vorhandenes Buch aktualisieren
+### Suche modell, art, isbn und version von einem Auto mit vorhandener Auto-ID
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
-mutation {
-  updateBuch(
-    _id: "00000000-0000-0000-0000-000000000003",
-    titel: "Geaendert",
-    rating: 5,
-    art: "DRUCKAUSGABE",
-    verlag: "FOO_VERLAG",
-    preis: 99.99,
-    rabatt: 0.099,
-    lieferbar: false,
-    datum: "2021-01-02",
-    isbn: "3-8273-1552-2",
-    homepage: "https://acme.com",
-    schlagwoerter: [
-      "JAVASCRIPT",
-      "TYPESCRIPT"
-    ],
-    version: 1
-  )
+{
+  auto(id: "00000000-0000-0000-0000-000000000001") {
+    modell
+    art
+    isbn
+    version
+  }
 }
 
-### Vorhandenes Buch loeschen
+### Suche modell und art von Autosn mit vorhandenem Modell
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
-mutation {
-  deleteBuch(id: "00000000-0000-0000-0000-000000000004")
+{
+  autos(modell: "Alpha") {
+    modell
+    art
+  }
+}
+
+
+### Suche modell, art und schlagwoerter von Autosn mit vorhandenem Modell
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+{
+  autos(modell: "a") {
+    modell
+    art
+    schlagwoerter
+  }
 }

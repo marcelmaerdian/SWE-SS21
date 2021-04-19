@@ -1,8 +1,8 @@
 {
-  "titel": "Geaendert",
+  "modell": "Geaendert",
   "rating": 5,
   "art": "KINDLE",
-  "verlag": "FOO_VERLAG",
+  "produzent": "FOO_VERLAG",
   "preis": 9999,
   "rabatt": 0.99,
   "lieferbar": true,
