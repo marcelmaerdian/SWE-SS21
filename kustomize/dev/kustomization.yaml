@@ -26,7 +26,7 @@ resources:
   - ../base
 
 configMapGenerator:
-  - name: buch-env
+  - name: auto-env
     behavior: merge
     literals:
       - NODE_ENV=development

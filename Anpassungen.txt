@@ -17,6 +17,8 @@ interface BuchData <<entity>> {
     + autoren: any
   }
 
+Hier werden all unsere Dokumentationsschritte veröffentlicht.
+=======
 isbn->seriennummer
 verlag->produzent
 autoren->produktionswerke
@@ -24,13 +26,18 @@ titel->modell
 
 
 Hier werden all unsere Dokumentationsschritte veröffentlicht.
+
 ----------------------------------------------------------------------------------------------------
 buch    ->  auto
 --------------------------------------------------------------------------------------
 (filme ->  autos)     //wurde auch geändert oder?
 ----------------------------------------------------------------------------------------------------
+
+verlag  ->  hersteller
+=======
 verlag  ->  produzent
 verlage -> produzenten
+
 autoren ->  produtkionswerke
 autor   ->  produktionswerk
 druckausgabe -> ?? 
@@ -71,8 +78,13 @@ BAR_PRODUKTION -> Mercedes
 
 Aufteilung:
 
-Maxi -> backend und kustomize
+
+Maxi -> backend und kustomize  
 Marcel -> restlcient und scripts
 Rouven -> src und test
 Yannick -> alle Dateien
 
+Maxi -> backend und kustomize
+Marcel -> restlcient und scripts
+Rouven -> src und test
+Yannick -> alle Dateien
