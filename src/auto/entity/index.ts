@@ -15,14 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { exec } from 'shelljs';
+/**
+ * Das Modul besteht aus Interfaces, Klassen und Funktionen für Bücher als
+ * _Entity_ gemäß _Domain Driven Design_. Dazu gehört auch die Validierung.
+ * @packageDocumentation
+ */
 
-const dockerAccount = 'juergenzimmermann';
-const imageName = 'auto';
-const imageTag = '1.0.0';
-
-const image = `docker.io/${dockerAccount}/${imageName}:${imageTag}`;
-
-// Dockerfile im aktuellen Verzeichnis
-// Download der diversen Layer fuer node:x.y.z-buster und distroless/nodejs
-exec(`docker build --tag ${image} .`);
+export { Auto, AutoArt, AutoData, Produzent } from './auto';
+export { AutoDocument, AutoModell, autoSchema } from './auto.modell';
+export { MAX_RATING } from './jsonSchema';
+export { ValidationErrorMsg, validateAuto } from './validateAuto';

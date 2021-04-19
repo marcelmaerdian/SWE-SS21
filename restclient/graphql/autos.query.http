@@ -16,56 +16,57 @@
 //
 // N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
 //
-// Introspection beim Apollo Server: Metadaten ueber die verfuegbaren Typen
-// https://graphql.org/learn/introspection
 
-### Welche Typen sind verfuegbar?
+### Suche id, modell, art und version von allen Autosn
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  __schema {
-    types {
-      name
-    }
+  autos {
+    id
+    modell
+    art
+    version
   }
 }
 
-### Details zum Typ "Auto": Felder und deren Typen
+### Suche modell, art, isbn und version von einem Auto mit vorhandener Auto-ID
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  __type(name: "Auto") {
-    name
-    kind
-    description
-    fields {
-      name
-      type {
-        name
-        kind
-        ofType {
-          name
-          kind
-          description
-        }
-      }
-    }
+  auto(id: "00000000-0000-0000-0000-000000000001") {
+    modell
+    art
+    isbn
+    version
   }
 }
 
-### Details zum Enum-Typ "Art"
+### Suche modell und art von Autosn mit vorhandenem Modell
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  __type(name: "Art") {
-    name
-    kind
-    description
+  autos(modell: "Alpha") {
+    modell
+    art
+  }
+}
+
+
+### Suche modell, art und schlagwoerter von Autosn mit vorhandenem Modell
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+{
+  autos(modell: "a") {
+    modell
+    art
+    schlagwoerter
   }
 }

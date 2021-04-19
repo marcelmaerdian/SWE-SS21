@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2018 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { exec } from 'shelljs';
+/**
+ * Das Modul enthält die Funktionen für EJS einschließlich für die Startseite.
+ * @packageDocumentation
+ */
 
-const dockerAccount = 'juergenzimmermann';
-const imageName = 'auto';
-const imageTag = '1.0.0';
+import type { Request, Response } from 'express';
 
-const image = `docker.io/${dockerAccount}/${imageName}:${imageTag}`;
+/**
+ * Funktion für EJS für die Startseite ("index").
+ *
+ * @param req Request-Objekt von Express mit der URL für EJS
+ * @param res Response-Objekt von Express
+ */
+export const index = (_: Request, res: Response) => {
+    res.render('index', { title: 'Beispiel' });
+};
 
-// Dockerfile im aktuellen Verzeichnis
-// Download der diversen Layer fuer node:x.y.z-buster und distroless/nodejs
-exec(`docker build --tag ${image} .`);
+export * from './neues-auto';
+export * from './suche';

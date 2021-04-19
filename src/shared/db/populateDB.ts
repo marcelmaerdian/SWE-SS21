@@ -32,7 +32,7 @@ import { testdaten } from './testdaten';
 
 const createCollection = async (db: Db) => {
     // http://mongodb.github.io/node-mongodb-native/3.5/api/Db.html#dropCollection
-    const collectionName = 'Buch';
+    const collectionName = 'Auto';
     logger.warn('Die Collection "%s" wird geloescht...', collectionName);
     let dropped = false;
     try {

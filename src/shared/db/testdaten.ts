@@ -21,29 +21,29 @@
  * @packageDocumentation
  */
 
-import type { BuchData } from '../../buch/entity';
+import type { AutoData } from '../../auto/entity';
 
 /* eslint-disable @typescript-eslint/naming-convention */
 
 /**
  * Die Testdaten, um die Test-DB neu zu laden, als JSON-Array.
  */
-export const testdaten: BuchData[] = [
+export const testdaten: AutoData[] = [
     {
         _id: '00000000-0000-0000-0000-000000000001',
-        titel: 'Alpha',
+        modell: 'Alpha',
         rating: 4,
         art: 'DRUCKAUSGABE',
-        verlag: 'FOO_VERLAG',
+        produzent: 'FOO_PRODUZENT',
         preis: 11.1,
         rabatt: 0.011,
         lieferbar: true,
         // https://docs.mongodb.com/manual/reference/method/Date
         datum: new Date('2020-02-01'),
-        isbn: '978-3897225831',
+        seriennummer: '978-3897225831',
         homepage: 'https://acme.at/',
         schlagwoerter: ['JAVASCRIPT'],
-        autoren: [
+        produktionswerke: [
             {
                 nachname: 'Alpha',
                 vorname: 'Adriana',
@@ -59,18 +59,18 @@ export const testdaten: BuchData[] = [
     },
     {
         _id: '00000000-0000-0000-0000-000000000002',
-        titel: 'Beta',
+        modell: 'Beta',
         rating: 2,
         art: 'KINDLE',
-        verlag: 'BAR_VERLAG',
+        produzent: 'BAR_PRODUZENT',
         preis: 22.2,
         rabatt: 0.022,
         lieferbar: true,
         datum: new Date('2020-02-02'),
-        isbn: '978-3827315526',
+        seriennummer: '978-3827315526',
         homepage: 'https://acme.biz/',
         schlagwoerter: ['TYPESCRIPT'],
-        autoren: [
+        produktionswerke: [
             {
                 nachname: 'Beta',
                 vorname: 'Brunhilde',
@@ -82,18 +82,18 @@ export const testdaten: BuchData[] = [
     },
     {
         _id: '00000000-0000-0000-0000-000000000003',
-        titel: 'Gamma',
+        modell: 'Gamma',
         rating: 1,
         art: 'DRUCKAUSGABE',
-        verlag: 'FOO_VERLAG',
+        produzent: 'FOO_PRODUZENT',
         preis: 33.3,
         rabatt: 0.033,
         lieferbar: true,
         datum: new Date('2020-02-03'),
-        isbn: '978-0201633610',
+        seriennummer: '978-0201633610',
         homepage: 'https://acme.com/',
         schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
-        autoren: [
+        produktionswerke: [
             {
                 nachname: 'Gamma',
                 vorname: 'Claus',
@@ -105,18 +105,18 @@ export const testdaten: BuchData[] = [
     },
     {
         _id: '00000000-0000-0000-0000-000000000004',
-        titel: 'Delta',
+        modell: 'Delta',
         rating: 3,
         art: 'DRUCKAUSGABE',
-        verlag: 'BAR_VERLAG',
+        produzent: 'BAR_PRODUZENT',
         preis: 44.4,
         rabatt: 0.044,
         lieferbar: true,
         datum: new Date('2020-02-04'),
-        isbn: '978-0387534046',
+        seriennummer: '978-0387534046',
         homepage: 'https://acme.de/',
         schlagwoerter: [],
-        autoren: [
+        produktionswerke: [
             {
                 nachname: 'Delta',
                 vorname: 'Dieter',
@@ -128,18 +128,18 @@ export const testdaten: BuchData[] = [
     },
     {
         _id: '00000000-0000-0000-0000-000000000005',
-        titel: 'Epsilon',
+        modell: 'Epsilon',
         rating: 2,
         art: 'KINDLE',
-        verlag: 'FOO_VERLAG',
+        produzent: 'FOO_PRODUZENT',
         preis: 55.5,
         rabatt: 0.055,
         lieferbar: true,
         datum: new Date('2020-02-05'),
-        isbn: '978-3824404810',
+        seriennummer: '978-3824404810',
         homepage: 'https://acme.es/',
         schlagwoerter: ['TYPESCRIPT'],
-        autoren: [
+        produktionswerke: [
             {
                 nachname: 'Epsilon',
                 vorname: 'Elfriede',

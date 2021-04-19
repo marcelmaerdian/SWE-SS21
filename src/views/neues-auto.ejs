@@ -22,34 +22,7 @@
   <body>
     <%- include('partials/header') -%>
 
-    <div class="card mt-2">
-      <div class="card-header">
-        <i class="material-icons">folder_open</i>
-        <span class="ml-1 font-weight-bold">Alle B&uuml;cher</span>
-      </div>
-
-      <div class="card-body">
-        <table class="table table-striped table-hover table-responsive">
-          <thead class="thead-default">
-            <tr>
-              <th>ID</th>
-              <th>Modell</th>
-              <th>Produzent</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% autos.forEach((auto) => { %>
-            <tr>
-              <td><%= auto._id %></td>
-              <td><%= auto.modell %></td>
-              <td><%= auto.produzent %></td>
-            </tr>
-            <% }); %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <h1 class="display-1 mt-4">Neues Auto</h1>
 
     <%- include('partials/scripts') -%>
   </body>
