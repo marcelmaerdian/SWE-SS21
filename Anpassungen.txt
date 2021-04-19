@@ -33,7 +33,7 @@ autor   ->  produktionswerk
 druckausgabe -> ?? 
 kindle  ->  ??
 prodnr    ->  seriennummer
-titel   ->  model
+titel   ->  modell
 preis   ->  preis
 --------------------------------------------------------------------------------------
 /html/index.ts
