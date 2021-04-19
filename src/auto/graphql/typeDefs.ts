@@ -51,10 +51,10 @@ export const typeDefs = gql`
         KINDLE
     }
 
-    "Enum-Typ fuer den Hersteller eines Autoes"
-    enum Hersteller {
-        FOO_HERSTELLER
-        BAR_HERSTELLER
+    "Enum-Typ fuer den Produzent eines Autoes"
+    enum Produzent {
+        FOO_PRODUZENT
+        BAR_PRODUZENT
     }
 
     "Datenschema eines Autoes, das empfangen oder gesendet wird"
@@ -64,7 +64,7 @@ export const typeDefs = gql`
         modell: String!
         rating: Int
         art: Art
-        hersteller: Hersteller!
+        produzent: Produzent!
         preis: Float
         rabatt: Float
         lieferbar: Boolean
@@ -86,7 +86,7 @@ export const typeDefs = gql`
             modell: String!
             rating: Int
             art: String
-            hersteller: String!
+            produzent: String!
             preis: Float
             rabatt: Float
             lieferbar: Boolean
@@ -100,7 +100,7 @@ export const typeDefs = gql`
             modell: String!
             rating: Int
             art: String
-            hersteller: String!
+            produzent: String!
             preis: Float
             rabatt: Float
             lieferbar: Boolean

@@ -33,9 +33,9 @@ export const jsonSchema: GenericJsonSchema = {
             type: 'string',
             enum: ['DRUCKAUSGABE', 'KINDLE', ''],
         },
-        hersteller: {
+        produzent: {
             type: 'string',
-            enum: ['BAR_HERSTELLER', 'FOO_HERSTELLER', ''],
+            enum: ['BAR_PRODUZENT', 'FOO_PRODUZENT', ''],
         },
         preis: {
             type: 'number',
@@ -76,6 +76,6 @@ export const jsonSchema: GenericJsonSchema = {
     },
     // seriennummer ist NUR beim Neuanlegen ein Pflichtfeld
     // Mongoose bietet dazu die Funktion MyModell.findByIdAndUpdate()
-    required: ['modell', 'art', 'hersteller'],
+    required: ['modell', 'art', 'produzent'],
     additionalProperties: false,
 };

@@ -72,9 +72,9 @@ export const validateAuto = (auto: Auto) => {
                 errorMsg.art =
                     'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.';
                 break;
-            case '/hersteller':
-                errorMsg.hersteller =
-                    'Der Hersteller eines Autoes muss FOO_HERSTELLER oder BAR_HERSTELLER sein.';
+            case '/produzent':
+                errorMsg.produzent =
+                    'Der Produzent eines Autoes muss FOO_PRODUZENT oder BAR_PRODUZENT sein.';
                 break;
             case '/preis':
                 errorMsg.preis = 'Der Preis darf nicht negativ sein.';

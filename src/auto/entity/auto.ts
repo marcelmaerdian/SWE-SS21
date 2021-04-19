@@ -24,9 +24,9 @@
  */
 
 /**
- * Alias-Typ für gültige Strings bei Herstelleren.
+ * Alias-Typ für gültige Strings bei Produzenten.
  */
-export type Hersteller = 'BAR_HERSTELLER' | 'FOO_HERSTELLER';
+export type Produzent = 'BAR_PRODUZENT' | 'FOO_PRODUZENT';
 
 /**
  * Alias-Typ für gültige Strings bei der Art eines Autoes.
@@ -47,7 +47,7 @@ export interface Auto {
     readonly modell: string | null | undefined;
     readonly rating: number | null | undefined;
     readonly art: AutoArt | '' | null | undefined;
-    readonly hersteller: Hersteller | '' | null | undefined;
+    readonly produzent: Produzent | '' | null | undefined;
     readonly preis: number | undefined;
     readonly rabatt: number | undefined;
     readonly lieferbar: boolean | undefined;

@@ -21,7 +21,7 @@
  * @packageDocumentation
  */
 
-export { Auto, AutoArt, AutoData, Hersteller } from './auto';
+export { Auto, AutoArt, AutoData, Produzent } from './auto';
 export { AutoDocument, AutoModell, autoSchema } from './auto.modell';
 export { MAX_RATING } from './jsonSchema';
 export { ValidationErrorMsg, validateAuto } from './validateAuto';

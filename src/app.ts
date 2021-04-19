@@ -78,7 +78,7 @@ const apiPath = '/api';
 export const PATHS = {
     // Template String
     autos: `${apiPath}/autos`,
-    hersteller: `${apiPath}/hersteller`,
+    produzenten: `${apiPath}/produzenten`,
     login: `${apiPath}/login`,
     graphql: '/graphql',
     html: '/html',
@@ -152,7 +152,7 @@ class App {
 
     private routes() {
         this.autosRoutes();
-        this.herstellerRoutes();
+        this.produzentRoutes();
         this.loginRoutes();
         this.autoGraphqlRoutes();
         this.htmlRoutes();
@@ -210,10 +210,10 @@ class App {
         this.app.use(PATHS.autos, router);
     }
 
-    private herstellerRoutes() {
+    private produzentRoutes() {
         const router = Router(); // eslint-disable-line new-cap
         router.get('/', notYetImplemented);
-        this.app.use(PATHS.hersteller, router);
+        this.app.use(PATHS.produzenten, router);
     }
 
     private loginRoutes() {

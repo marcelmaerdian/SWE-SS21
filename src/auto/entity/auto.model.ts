@@ -20,7 +20,7 @@
  * @packageDocumentation
  */
 
-import type { Auto, AutoArt, Hersteller } from './auto';
+import type { Auto, AutoArt, Produzent } from './auto';
 import { Document, Schema, SchemaType, modell } from 'mongoose';
 import { autoIndex, logColorConsole } from '../../shared';
 import type { Modell } from 'mongoose';
@@ -48,7 +48,7 @@ export class AutoDocument extends Document<string> implements Auto {
 
     readonly art: AutoArt | '' | null | undefined;
 
-    readonly hersteller: Hersteller | '' | null | undefined;
+    readonly produzent: Produzent | '' | null | undefined;
 
     readonly preis: number | undefined;
 
@@ -91,10 +91,10 @@ export const autoSchema = new Schema<AutoDocument, Modell<AutoDocument>>(
         modell: { type: String, required: true, unique: true },
         rating: { type: Number, min: 0, max: 5 },
         art: { type: String, enum: ['DRUCKAUSGABE', 'KINDLE'] },
-        hersteller: {
+        produzent: {
             type: String,
             required: true,
-            enum: ['FOO_HERSTELLER', 'BAR_HERSTELLER'],
+            enum: ['FOO_PRODUZENT', 'BAR_PRODUZENT'],
             // es gibt auch
             //  lowercase: true
             //  uppercase: true
