@@ -44,7 +44,7 @@ const neuesAuto: Auto = {
     model: 'Neu',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    hersteller: 'FOO_HERSTELLER',
+    produzent: 'FOO_PRODUZENT',
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
@@ -58,7 +58,7 @@ const neuesAutoInvalid: object = {
     model: 'Blabla',
     rating: -1,
     art: 'UNSICHTBAR',
-    hersteller: 'NO_HERSTELLER',
+    produzent: 'NO_PRODUZENT',
     preis: 0,
     rabatt: 0,
     lieferbar: true,
@@ -71,7 +71,7 @@ const neuesAutoModelExistiert: Auto = {
     model: 'Alpha',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    hersteller: 'FOO_HERSTELLER',
+    produzent: 'FOO_PRODUZENT',
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
@@ -170,7 +170,7 @@ describe('POST /api/autos', () => {
 
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
-        const { art, rating, hersteller, datum, seriennummer } = await response.json();
+        const { art, rating, produzent, datum, seriennummer } = await response.json();
 
         expect(art).to.be.equal(
             'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.',
@@ -178,8 +178,8 @@ describe('POST /api/autos', () => {
         expect(rating).to.be.equal(
             'Eine Bewertung muss zwischen 0 und 5 liegen.',
         );
-        expect(hersteller).to.be.equal(
-            'Der Hersteller eines Autoes muss FOO_HERSTELLER oder BAR_HERSTELLER sein.',
+        expect(produzent).to.be.equal(
+            'Der Produzent eines Autoes muss FOO_PRODUZENT oder BAR_PRODUZENT sein.',
         );
         expect(datum).to.be.equal('Das Datum muss im Format yyyy-MM-dd sein.');
         expect(seriennummer).to.be.equal('Die SERIENNUMMER-Nummer ist nicht korrekt.');

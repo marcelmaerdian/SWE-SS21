@@ -45,7 +45,7 @@ const geaendertesAuto: Omit<Auto, 'seriennummer'> = {
     model: 'Geaendert',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    hersteller: 'FOO_HERSTELLER',
+    produzent: 'FOO_PRODUZENT',
     preis: 33.33,
     rabatt: 0.033,
     lieferbar: true,
@@ -60,7 +60,7 @@ const geaendertesAutoIdNichtVorhanden: Omit<Auto, 'seriennummer' | 'homepage'> =
     model: 'Nichtvorhanden',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    hersteller: 'FOO_HERSTELLER',
+    produzent: 'FOO_PRODUZENT',
     preis: 33.33,
     rabatt: 0.033,
     lieferbar: true,
@@ -74,7 +74,7 @@ const geaendertesAutoInvalid: object = {
     model: 'Alpha',
     rating: -1,
     art: 'UNSICHTBAR',
-    hersteller: 'NO_HERSTELLER',
+    produzent: 'NO_PRODUZENT',
     preis: 0.01,
     rabatt: 0,
     lieferbar: true,
@@ -89,7 +89,7 @@ const veraltesAuto: object = {
     model: 'Veraltet',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    hersteller: 'FOO_HERSTELLER',
+    produzent: 'FOO_PRODUZENT',
     preis: 33.33,
     rabatt: 0.033,
     lieferbar: true,
@@ -197,15 +197,15 @@ describe('PUT /api/autos/:id', () => {
 
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
-        const { art, rating, hersteller, datum, seriennummer } = await response.json();
+        const { art, rating, produzent, datum, seriennummer } = await response.json();
         expect(art).to.be.equal(
             'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.',
         );
         expect(rating).to.be.equal(
             `Eine Bewertung muss zwischen 0 und ${MAX_RATING} liegen.`,
         );
-        expect(hersteller).to.be.equal(
-            'Der Hersteller eines Autoes muss FOO_HERSTELLER oder BAR_HERSTELLER sein.',
+        expect(produzent).to.be.equal(
+            'Der Produzent eines Autoes muss FOO_PRODUZENT oder BAR_PRODUZENT sein.',
         );
         expect(datum).to.be.equal('Das Datum muss im Format yyyy-MM-dd sein.');
         expect(seriennummer).to.be.equal('Die SERIENNUMMER-Nummer ist nicht korrekt.');
