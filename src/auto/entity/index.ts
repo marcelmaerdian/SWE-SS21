@@ -22,6 +22,6 @@
  */
 
 export { Auto, AutoArt, AutoData, Produzent } from './auto';
-export { AutoDocument, AutoModell, autoSchema } from './auto.modell';
+export { AutoDocument, AutoModell, autoSchema } from './auto.model';
 export { MAX_RATING } from './jsonSchema';
 export { ValidationErrorMsg, validateAuto } from './validateAuto';
