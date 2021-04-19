@@ -24,17 +24,17 @@
  */
 
 import {
-    BuchInvalid,
-    BuchNotExists,
-    TitelExists,
+    AutoInvalid,
+    AutoNotExists,
+    ModellExists,
     VersionInvalid,
     VersionOutdated,
 } from './../service/errors';
-import { BuchService, BuchServiceError } from '../service';
-import type { Buch } from './../entity';
+import { AutoService, AutoServiceError } from '../service';
+import type { Auto } from './../entity';
 import { logger } from '../../shared';
 
-const buchService = new BuchService();
+const autoService = new AutoService();
 
 // https://www.apollographql.com/docs/apollo-server/data/resolvers
 // Zugriff auf Header-Daten, z.B. Token
@@ -43,39 +43,39 @@ const buchService = new BuchService();
 
 // Resultat mit id (statt _id) und version (statt __v)
 // __ ist bei GraphQL fuer interne Zwecke reserviert
-const withIdAndVersion = (buch: Buch) => {
-    const result: any = buch;
-    result.id = buch._id;
-    result.version = buch.__v;
-    return buch;
+const withIdAndVersion = (auto: Auto) => {
+    const result: any = auto;
+    result.id = auto._id;
+    result.version = auto.__v;
+    return auto;
 };
 
-const findBuchById = async (id: string) => {
-    const buch = await buchService.findById(id);
-    if (buch === undefined) {
+const findAutoById = async (id: string) => {
+    const auto = await autoService.findById(id);
+    if (auto === undefined) {
         return;
     }
-    return withIdAndVersion(buch);
+    return withIdAndVersion(auto);
 };
 
-const findBuecher = async (titel: string | undefined) => {
-    const suchkriterium = titel === undefined ? {} : { titel };
-    const buecher = await buchService.find(suchkriterium);
-    return buecher.map((buch: Buch) => withIdAndVersion(buch));
+const findAutos = async (modell: string | undefined) => {
+    const suchkriterium = modell === undefined ? {} : { modell };
+    const autos = await autoService.find(suchkriterium);
+    return autos.map((auto: Auto) => withIdAndVersion(auto));
 };
 
-interface TitelCriteria {
-    titel: string;
+interface ModellCriteria {
+    modell: string;
 }
 
 interface IdCriteria {
     id: string;
 }
 
-const createBuch = async (buch: Buch) => {
-    const result = await buchService.create(buch);
-    logger.debug('resolvers createBuch(): result=%o', result);
-    if (result instanceof BuchServiceError) {
+const createAuto = async (auto: Auto) => {
+    const result = await autoService.create(auto);
+    logger.debug('resolvers createAuto(): result=%o', result);
+    if (result instanceof AutoServiceError) {
         return;
     }
     return result;
@@ -83,58 +83,58 @@ const createBuch = async (buch: Buch) => {
 
 const logUpdateResult = (
     result:
-        | BuchInvalid
-        | BuchNotExists
-        | TitelExists
+        | AutoInvalid
+        | AutoNotExists
+        | ModellExists
         | VersionInvalid
         | VersionOutdated
         | number,
 ) => {
-    if (result instanceof BuchInvalid) {
-        logger.debug('resolvers updateBuch(): validation msg = %o', result.msg);
-    } else if (result instanceof TitelExists) {
+    if (result instanceof AutoInvalid) {
+        logger.debug('resolvers updateAuto(): validation msg = %o', result.msg);
+    } else if (result instanceof ModellExists) {
         logger.debug(
-            'resolvers updateBuch(): vorhandener titel = %s',
-            result.titel,
+            'resolvers updateAuto(): vorhandener modell = %s',
+            result.modell,
         );
-    } else if (result instanceof BuchNotExists) {
+    } else if (result instanceof AutoNotExists) {
         logger.debug(
-            'resolvers updateBuch(): nicht-vorhandene id = %s',
+            'resolvers updateAuto(): nicht-vorhandene id = %s',
             result.id,
         );
     } else if (result instanceof VersionInvalid) {
         logger.debug(
-            'resolvers updateBuch(): ungueltige version = %d',
+            'resolvers updateAuto(): ungueltige version = %d',
             result.version,
         );
     } else if (result instanceof VersionOutdated) {
         logger.debug(
-            'resolvers updateBuch(): alte version = %d',
+            'resolvers updateAuto(): alte version = %d',
             result.version,
         );
     } else {
         logger.debug(
-            'resolvers updateBuch(): aktualisierte Version= %d',
+            'resolvers updateAuto(): aktualisierte Version= %d',
             result,
         );
     }
 };
 
-const updateBuch = async (buch: Buch) => {
+const updateAuto = async (auto: Auto) => {
     logger.debug(
-        'resolvers updateBuch(): zu aktualisieren = %s',
-        JSON.stringify(buch),
+        'resolvers updateAuto(): zu aktualisieren = %s',
+        JSON.stringify(auto),
     );
     // nullish coalescing
-    const version = buch.__v ?? 0;
-    const result = await buchService.update(buch, version.toString());
+    const version = auto.__v ?? 0;
+    const result = await autoService.update(auto, version.toString());
     logUpdateResult(result);
     return result;
 };
 
-const deleteBuch = async (id: string) => {
-    const result = await buchService.delete(id);
-    logger.debug('resolvers deleteBuch(): result = %s', result);
+const deleteAuto = async (id: string) => {
+    const result = await autoService.delete(id);
+    logger.debug('resolvers deleteAuto(): result = %s', result);
     return result;
 };
 
@@ -143,51 +143,51 @@ const query = {
     /**
      * Bücher suchen
      * @param _ nicht benutzt
-     * @param __namedParameters JSON-Objekt mit `titel` als Suchkriterium
+     * @param __namedParameters JSON-Objekt mit `modell` als Suchkriterium
      * @returns Promise mit einem JSON-Array der gefundenen Bücher
      */
-    buecher: (_: unknown, { titel }: TitelCriteria) => findBuecher(titel),
+    autos: (_: unknown, { modell }: ModellCriteria) => findAutos(modell),
 
     /**
-     * Buch suchen
+     * Auto suchen
      * @param _ nicht benutzt
      * @param __namedParameters JSON-Objekt mit `id` als Suchkriterium
-     * @returns Promise mit dem gefundenen {@linkcode Buch} oder `undefined`
+     * @returns Promise mit dem gefundenen {@linkcode Auto} oder `undefined`
      */
-    buch: (_: unknown, { id }: IdCriteria) => findBuchById(id),
+    auto: (_: unknown, { id }: IdCriteria) => findAutoById(id),
 };
 
 const mutation = {
     /**
-     * Neues Buch anlegen
+     * Neues Auto anlegen
      * @param _ nicht benutzt
-     * @param buch JSON-Objekt mit dem neuen {@linkcode Buch}
+     * @param auto JSON-Objekt mit dem neuen {@linkcode Auto}
      * @returns Promise mit der generierten ID
      */
-    createBuch: (_: unknown, buch: Buch) => createBuch(buch),
+    createAuto: (_: unknown, auto: Auto) => createAuto(auto),
 
     /**
-     * Vorhandenes {@linkcode Buch} aktualisieren
+     * Vorhandenes {@linkcode Auto} aktualisieren
      * @param _ nicht benutzt
-     * @param buch JSON-Objekt mit dem zu aktualisierenden Buch
-     * @returns Das aktualisierte Buch als {@linkcode BuchData} in einem Promise,
+     * @param auto JSON-Objekt mit dem zu aktualisierenden Auto
+     * @returns Das aktualisierte Auto als {@linkcode AutoData} in einem Promise,
      * falls kein Fehler aufgetreten ist. Ansonsten ein Promise mit einem Fehler
      * durch:
-     * - {@linkcode BuchInvalid}
-     * - {@linkcode BuchNotExists}
-     * - {@linkcode TitelExists}
+     * - {@linkcode AutoInvalid}
+     * - {@linkcode AutoNotExists}
+     * - {@linkcode ModellExists}
      * - {@linkcode VersionInvalid}
      * - {@linkcode VersionOutdated}
      */
-    updateBuch: (_: unknown, buch: Buch) => updateBuch(buch),
+    updateAuto: (_: unknown, auto: Auto) => updateAuto(auto),
 
     /**
-     * Buch löschen
+     * Auto löschen
      * @param _ nicht benutzt
      * @param __namedParameters JSON-Objekt mit `id` zur Identifikation
-     * @returns true, falls das Buch gelöscht wurde. Sonst false.
+     * @returns true, falls das Auto gelöscht wurde. Sonst false.
      */
-    deleteBuch: (_: unknown, { id }: IdCriteria) => deleteBuch(id),
+    deleteAuto: (_: unknown, { id }: IdCriteria) => deleteAuto(id),
 };
 
 /**

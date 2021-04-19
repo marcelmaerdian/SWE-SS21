@@ -4,9 +4,9 @@ export const MAX_RATING = 5;
 
 export const jsonSchema: GenericJsonSchema = {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: 'http://acme.com/buch.json#',
-    title: 'Buch',
-    description: 'Eigenschaften eines Buches: Typen und Constraints',
+    $id: 'http://acme.com/auto.json#',
+    title: 'Auto',
+    description: 'Eigenschaften eines Autoes: Typen und Constraints',
     type: 'object',
     properties: {
         /* eslint-disable @typescript-eslint/naming-convention */
@@ -20,7 +20,7 @@ export const jsonSchema: GenericJsonSchema = {
             minimum: 0,
         },
         /* eslint-enable @typescript-eslint/naming-convention */
-        titel: {
+        modell: {
             type: 'string',
             pattern: '^\\w.*',
         },
@@ -33,9 +33,9 @@ export const jsonSchema: GenericJsonSchema = {
             type: 'string',
             enum: ['DRUCKAUSGABE', 'KINDLE', ''],
         },
-        verlag: {
+        hersteller: {
             type: 'string',
-            enum: ['BAR_VERLAG', 'FOO_VERLAG', ''],
+            enum: ['BAR_HERSTELLER', 'FOO_HERSTELLER', ''],
         },
         preis: {
             type: 'number',
@@ -48,11 +48,11 @@ export const jsonSchema: GenericJsonSchema = {
         },
         lieferbar: { type: 'boolean' },
         datum: { type: 'string', pattern: '\\d{4}-\\d{2}-\\d{2}' },
-        isbn: {
+        seriennummer: {
             type: 'string',
             // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s13.html
             pattern:
-                '^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|' +
+                '^(?:SERIENNUMMER(?:-1[03])?:? )?(?=[0-9X]{10}$|' +
                 '(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|' +
                 '(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?' +
                 '[0-9]+[- ]?[0-9]+[- ]?[0-9X]*',
@@ -69,13 +69,13 @@ export const jsonSchema: GenericJsonSchema = {
             type: 'array',
             items: { type: 'string' },
         },
-        autoren: {
+        produktionswerke: {
             type: 'array',
             items: { type: 'object' },
         },
     },
-    // isbn ist NUR beim Neuanlegen ein Pflichtfeld
-    // Mongoose bietet dazu die Funktion MyModel.findByIdAndUpdate()
-    required: ['titel', 'art', 'verlag'],
+    // seriennummer ist NUR beim Neuanlegen ein Pflichtfeld
+    // Mongoose bietet dazu die Funktion MyModell.findByIdAndUpdate()
+    required: ['modell', 'art', 'hersteller'],
     additionalProperties: false,
 };

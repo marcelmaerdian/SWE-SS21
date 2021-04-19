@@ -16,14 +16,14 @@
  */
 
 /**
- * Das Modul besteht aus dem Schema und Model für _Mongoose_.
+ * Das Modul besteht aus dem Schema und Modell für _Mongoose_.
  * @packageDocumentation
  */
 
-import type { Buch, BuchArt, Verlag } from './buch';
-import { Document, Schema, SchemaType, model } from 'mongoose';
+import type { Auto, AutoArt, Hersteller } from './auto';
+import { Document, Schema, SchemaType, modell } from 'mongoose';
 import { autoIndex, logColorConsole } from '../../shared';
-import type { Model } from 'mongoose';
+import type { Modell } from 'mongoose';
 // RFC version 1: timestamps            https://github.com/uuidjs/uuid#uuidv1options-buffer-offset
 // RFC version 3: namespace mit MD5     https://github.com/uuidjs/uuid#uuidv3name-namespace-buffer-offset
 // RFC version 4: random                https://github.com/uuidjs/uuid#uuidv4options-buffer-offset
@@ -39,16 +39,16 @@ if (logColorConsole) {
 
 /**
  * Document-Klasse für _Mongoose_ mit `_id` vom Typ `string` und passend zum
- * Interface {@linkcode Buch}
+ * Interface {@linkcode Auto}
  */
-export class BuchDocument extends Document<string> implements Buch {
-    readonly titel: string | null | undefined;
+export class AutoDocument extends Document<string> implements Auto {
+    readonly modell: string | null | undefined;
 
     readonly rating: number | null | undefined;
 
-    readonly art: BuchArt | '' | null | undefined;
+    readonly art: AutoArt | '' | null | undefined;
 
-    readonly verlag: Verlag | '' | null | undefined;
+    readonly hersteller: Hersteller | '' | null | undefined;
 
     readonly preis: number | undefined;
 
@@ -58,13 +58,13 @@ export class BuchDocument extends Document<string> implements Buch {
 
     readonly datum: Date | string | undefined;
 
-    readonly isbn: string | null | undefined;
+    readonly seriennummer: string | null | undefined;
 
     readonly homepage: string | null | undefined;
 
     readonly schlagwoerter?: string[];
 
-    readonly autoren: unknown;
+    readonly produktionswerke: unknown;
 
     readonly createdAt?: number;
 
@@ -82,19 +82,19 @@ export class BuchDocument extends Document<string> implements Buch {
  * Das Schema für Mongoose, das dem Schema bei einem relationalen DB-System
  * entspricht, welches durch `CREATE TABLE`, `CREATE INDEX` usw. entsteht.
  */
-export const buchSchema = new Schema<BuchDocument, Model<BuchDocument>>(
+export const autoSchema = new Schema<AutoDocument, Modell<AutoDocument>>(
     {
         // MongoDB erstellt implizit einen Index fuer _id
         // mongoose-id-assigner hat geringe Download-Zahlen und
         // uuid-mongodb hat keine Typ-Definitionen fuer TypeScript
         _id: { type: String, default: uuid },
-        titel: { type: String, required: true, unique: true },
+        modell: { type: String, required: true, unique: true },
         rating: { type: Number, min: 0, max: 5 },
         art: { type: String, enum: ['DRUCKAUSGABE', 'KINDLE'] },
-        verlag: {
+        hersteller: {
             type: String,
             required: true,
-            enum: ['FOO_VERLAG', 'BAR_VERLAG'],
+            enum: ['FOO_HERSTELLER', 'BAR_HERSTELLER'],
             // es gibt auch
             //  lowercase: true
             //  uppercase: true
@@ -103,11 +103,11 @@ export const buchSchema = new Schema<BuchDocument, Model<BuchDocument>>(
         rabatt: Number,
         lieferbar: Boolean,
         datum: Date,
-        isbn: { type: String, required: true, unique: true, immutable: true },
+        seriennummer: { type: String, required: true, unique: true, immutable: true },
         homepage: String,
         schlagwoerter: { type: [String], sparse: true },
         // "anything goes"
-        autoren: [{}],
+        produktionswerke: [{}],
     },
     {
         // default: virtueller getter "id"
@@ -124,7 +124,7 @@ export const buchSchema = new Schema<BuchDocument, Model<BuchDocument>>(
 // Optimistische Synchronisation durch das Feld __v fuer die Versionsnummer
 // https://mongoosejs.com/docs/guide.html#versionKey
 // https://github.com/Automattic/mongoose/issues/1265
-const optimistic = (schema: Schema<BuchDocument, Model<BuchDocument>>) => {
+const optimistic = (schema: Schema<AutoDocument, Modell<AutoDocument>>) => {
     schema.pre('findOneAndUpdate', function () {
         // UpdateQuery ist abgeleitet von ReadonlyPartial<Schema<...>>
         const update = this.getUpdate(); // eslint-disable-line @typescript-eslint/no-invalid-this
@@ -158,11 +158,11 @@ const optimistic = (schema: Schema<BuchDocument, Model<BuchDocument>>) => {
     });
 };
 
-buchSchema.plugin(optimistic);
+autoSchema.plugin(optimistic);
 
 /**
- * Ein Model ist ein übersetztes Schema und stellt die CRUD-Operationen für
+ * Ein Modell ist ein übersetztes Schema und stellt die CRUD-Operationen für
  * die Dokumente bereit, d.h. das Pattern _Active Record_ wird realisiert.
- * Der Name des Models wird als Name für die Collection in MongoDB verwendet.
+ * Der Name des Modells wird als Name für die Collection in MongoDB verwendet.
  */
-export const BuchModel = model<BuchDocument>('Buch', buchSchema); // eslint-disable-line @typescript-eslint/naming-convention
+export const AutoModell = modell<AutoDocument>('Auto', autoSchema); // eslint-disable-line @typescript-eslint/naming-convention

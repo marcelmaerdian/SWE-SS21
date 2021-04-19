@@ -26,7 +26,7 @@
  * - Boolean: true, false
  * - ID: eindeutiger Bezeichner, wird serialisiert wie ein String
  *
- * `Buch`: eigene Typdefinition für Queries. `!` markiert Pflichtfelder
+ * `Auto`: eigene Typdefinition für Queries. `!` markiert Pflichtfelder
  *
  * `Query`: Signatur der Lese-Methoden
  *
@@ -45,71 +45,71 @@ import { gql } from 'apollo-server-express';
  * und für die Formatierung durch Prettier verwendet.
  */
 export const typeDefs = gql`
-    "Enum-Typ fuer die Art eines Buches"
+    "Enum-Typ fuer die Art eines Autoes"
     enum Art {
         DRUCKAUSGABE
         KINDLE
     }
 
-    "Enum-Typ fuer den Verlag eines Buches"
-    enum Verlag {
-        FOO_VERLAG
-        BAR_VERLAG
+    "Enum-Typ fuer den Hersteller eines Autoes"
+    enum Hersteller {
+        FOO_HERSTELLER
+        BAR_HERSTELLER
     }
 
-    "Datenschema eines Buches, das empfangen oder gesendet wird"
-    type Buch {
+    "Datenschema eines Autoes, das empfangen oder gesendet wird"
+    type Auto {
         id: ID!
         version: Int
-        titel: String!
+        modell: String!
         rating: Int
         art: Art
-        verlag: Verlag!
+        hersteller: Hersteller!
         preis: Float
         rabatt: Float
         lieferbar: Boolean
         datum: String
-        isbn: String
+        seriennummer: String
         homepage: String
         schlagwoerter: [String]
     }
 
-    "Funktionen, um Buecher zu empfangen"
+    "Funktionen, um Autos zu empfangen"
     type Query {
-        buecher(titel: String): [Buch]
-        buch(id: ID!): Buch
+        autos(modell: String): [Auto]
+        auto(id: ID!): Auto
     }
 
-    "Funktionen, um Buecher anzulegen, zu aktualisieren oder zu loeschen"
+    "Funktionen, um Autos anzulegen, zu aktualisieren oder zu loeschen"
     type Mutation {
-        createBuch(
-            titel: String!
+        createAuto(
+            modell: String!
             rating: Int
             art: String
-            verlag: String!
+            hersteller: String!
             preis: Float
             rabatt: Float
             lieferbar: Boolean
             datum: String
-            isbn: String
+            seriennummer: String
             homepage: String
             schlagwoerter: [String]
         ): String
-        updateBuch(
+        updateAuto(
             _id: ID
-            titel: String!
+            modell: String!
             rating: Int
             art: String
-            verlag: String!
+            hersteller: String!
             preis: Float
             rabatt: Float
             lieferbar: Boolean
             datum: String
-            isbn: String
+            seriennummer: String
             homepage: String
             schlagwoerter: [String]
             version: Int
         ): Int
-        deleteBuch(id: ID!): Boolean
+        deleteAuto(id: ID!): Boolean
     }
 `;

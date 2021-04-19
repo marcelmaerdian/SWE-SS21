@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,21 +16,13 @@
  */
 
 /**
- * Das Modul enthält die Funktionen für EJS einschließlich für die Startseite.
+ * Das Modul besteht aus den Klassen {@linkcode AutoFileService} und
+ * {@linkcode AutoService}, um Bücher und ihre zugehörige Binärdateien in
+ * MongoDB abzuspeichern, auszulesen, zu ändern und zu löschen einschließlich
+ * der Klassen für die Fehlerbehandlung.
  * @packageDocumentation
  */
 
-import type { Request, Response } from 'express';
-
-/**
- * Funktion für EJS für die Startseite ("index").
- *
- * @param req Request-Objekt von Express mit der URL für EJS
- * @param res Response-Objekt von Express
- */
-export const index = (_: Request, res: Response) => {
-    res.render('index', { title: 'Beispiel' });
-};
-
-export * from './neues-buch';
-export * from './suche';
+export * from './auto-file.service';
+export * from './auto.service';
+export * from './errors';

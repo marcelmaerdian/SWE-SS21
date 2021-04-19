@@ -20,8 +20,8 @@ import { HttpStatus, logger, nodeConfig } from '../../../src/shared';
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import fetch, { Headers, Request } from 'node-fetch';
 import type { AddressInfo } from 'net';
-import type { Buch } from '../../../src/buch/entity';
-import { MAX_RATING } from '../../../src/buch/entity';
+import type { Auto } from '../../../src/auto/entity';
+import { MAX_RATING } from '../../../src/auto/entity';
 import { PATHS } from '../../../src/app';
 import type { Server } from 'http';
 import chai from 'chai';
@@ -40,83 +40,83 @@ const { expect } = chai;
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const geaendertesBuch: Omit<Buch, 'isbn'> = {
-    // isbn wird nicht geaendet
-    titel: 'Geaendert',
+const geaendertesAuto: Omit<Auto, 'seriennummer'> = {
+    // seriennummer wird nicht geaendet
+    model: 'Geaendert',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    verlag: 'FOO_VERLAG',
+    hersteller: 'FOO_HERSTELLER',
     preis: 33.33,
     rabatt: 0.033,
     lieferbar: true,
     datum: '2016-02-03',
     homepage: 'https://test.te',
-    autoren: [{ nachname: 'Gamma', vorname: 'Claus' }],
+    produktionswerke: [{ nachname: 'Gamma', vorname: 'Claus' }],
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
 };
 const idVorhanden = '00000000-0000-0000-0000-000000000003';
 
-const geaendertesBuchIdNichtVorhanden: Omit<Buch, 'isbn' | 'homepage'> = {
-    titel: 'Nichtvorhanden',
+const geaendertesAutoIdNichtVorhanden: Omit<Auto, 'seriennummer' | 'homepage'> = {
+    model: 'Nichtvorhanden',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    verlag: 'FOO_VERLAG',
+    hersteller: 'FOO_HERSTELLER',
     preis: 33.33,
     rabatt: 0.033,
     lieferbar: true,
     datum: '2016-02-03',
-    autoren: [{ nachname: 'Gamma', vorname: 'Claus' }],
+    produktionswerke: [{ nachname: 'Gamma', vorname: 'Claus' }],
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
 };
 const idNichtVorhanden = '00000000-0000-0000-0000-000000000999';
 
-const geaendertesBuchInvalid: object = {
-    titel: 'Alpha',
+const geaendertesAutoInvalid: object = {
+    model: 'Alpha',
     rating: -1,
     art: 'UNSICHTBAR',
-    verlag: 'NO_VERLAG',
+    hersteller: 'NO_HERSTELLER',
     preis: 0.01,
     rabatt: 0,
     lieferbar: true,
     datum: '12345-123-123',
-    isbn: 'falsche-ISBN',
-    autoren: [{ nachname: 'Test', vorname: 'Theo' }],
+    seriennummer: 'falsche-SERIENNUMMER',
+    produktionswerke: [{ nachname: 'Test', vorname: 'Theo' }],
     schlagwoerter: [],
 };
 
-const veraltesBuch: object = {
-    // isbn wird nicht geaendet
-    titel: 'Veraltet',
+const veraltesAuto: object = {
+    // seriennummer wird nicht geaendet
+    model: 'Veraltet',
     rating: 1,
     art: 'DRUCKAUSGABE',
-    verlag: 'FOO_VERLAG',
+    hersteller: 'FOO_HERSTELLER',
     preis: 33.33,
     rabatt: 0.033,
     lieferbar: true,
     datum: '2016-02-03',
     homepage: 'https://test.te',
-    autoren: [{ nachname: 'Gamma', vorname: 'Claus' }],
+    produktionswerke: [{ nachname: 'Gamma', vorname: 'Claus' }],
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
 };
 
 // -----------------------------------------------------------------------------
 // T e s t s
 // -----------------------------------------------------------------------------
-const path = PATHS.buecher;
+const path = PATHS.autos;
 let server: Server;
-let buecherUri: string;
+let autosUri: string;
 let loginUri: string;
 
 // Test-Suite
-describe('PUT /api/buecher/:id', () => {
+describe('PUT /api/autos/:id', () => {
     // Testserver starten und dabei mit der DB verbinden
     beforeAll(async () => {
         server = await createTestserver();
 
         const address = server.address() as AddressInfo;
         const baseUri = `https://${nodeConfig.host}:${address.port}`;
-        buecherUri = `${baseUri}${path}`;
-        logger.info(`buecherUri = ${buecherUri}`);
+        autosUri = `${baseUri}${path}`;
+        logger.info(`autosUri = ${autosUri}`);
         loginUri = `${baseUri}${PATHS.login}`;
     });
 
@@ -124,7 +124,7 @@ describe('PUT /api/buecher/:id', () => {
         server.close();
     });
 
-    test('Vorhandenes Buch aendern', async () => {
+    test('Vorhandenes Auto aendern', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -132,8 +132,8 @@ describe('PUT /api/buecher/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const body = JSON.stringify(geaendertesAuto);
+        const request = new Request(`${autosUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -149,7 +149,7 @@ describe('PUT /api/buecher/:id', () => {
         expect(responseBody).to.be.empty;
     });
 
-    test('Nicht-vorhandenes Buch aendern', async () => {
+    test('Nicht-vorhandenes Auto aendern', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -157,8 +157,8 @@ describe('PUT /api/buecher/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuchIdNichtVorhanden);
-        const request = new Request(`${buecherUri}/${idNichtVorhanden}`, {
+        const body = JSON.stringify(geaendertesAutoIdNichtVorhanden);
+        const request = new Request(`${autosUri}/${idNichtVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -172,11 +172,11 @@ describe('PUT /api/buecher/:id', () => {
         expect(response.status).to.be.equal(HttpStatus.PRECONDITION_FAILED);
         const responseBody = await response.text();
         expect(responseBody).to.be.equal(
-            `Es gibt kein Buch mit der ID "${idNichtVorhanden}".`,
+            `Es gibt kein Auto mit der ID "${idNichtVorhanden}".`,
         );
     });
 
-    test('Vorhandenes Buch aendern, aber mit ungueltigen Daten', async () => {
+    test('Vorhandenes Auto aendern, aber mit ungueltigen Daten', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -184,8 +184,8 @@ describe('PUT /api/buecher/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuchInvalid);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const body = JSON.stringify(geaendertesAutoInvalid);
+        const request = new Request(`${autosUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -197,29 +197,29 @@ describe('PUT /api/buecher/:id', () => {
 
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
-        const { art, rating, verlag, datum, isbn } = await response.json();
+        const { art, rating, hersteller, datum, seriennummer } = await response.json();
         expect(art).to.be.equal(
-            'Die Art eines Buches muss KINDLE oder DRUCKAUSGABE sein.',
+            'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.',
         );
         expect(rating).to.be.equal(
             `Eine Bewertung muss zwischen 0 und ${MAX_RATING} liegen.`,
         );
-        expect(verlag).to.be.equal(
-            'Der Verlag eines Buches muss FOO_VERLAG oder BAR_VERLAG sein.',
+        expect(hersteller).to.be.equal(
+            'Der Hersteller eines Autoes muss FOO_HERSTELLER oder BAR_HERSTELLER sein.',
         );
         expect(datum).to.be.equal('Das Datum muss im Format yyyy-MM-dd sein.');
-        expect(isbn).to.be.equal('Die ISBN-Nummer ist nicht korrekt.');
+        expect(seriennummer).to.be.equal('Die SERIENNUMMER-Nummer ist nicht korrekt.');
     });
 
-    test('Vorhandenes Buch aendern, aber ohne Versionsnummer', async () => {
+    test('Vorhandenes Auto aendern, aber ohne Versionsnummer', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(geaendertesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const body = JSON.stringify(geaendertesAuto);
+        const request = new Request(`${autosUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -235,7 +235,7 @@ describe('PUT /api/buecher/:id', () => {
         expect(responseBody).to.be.equal('Versionsnummer fehlt');
     });
 
-    test('Vorhandenes Buch aendern, aber mit alter Versionsnummer', async () => {
+    test('Vorhandenes Auto aendern, aber mit alter Versionsnummer', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -243,8 +243,8 @@ describe('PUT /api/buecher/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"-1"',
         });
-        const body = JSON.stringify(veraltesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const body = JSON.stringify(veraltesAuto);
+        const request = new Request(`${autosUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -260,14 +260,14 @@ describe('PUT /api/buecher/:id', () => {
         expect(responseBody).to.have.string('Die Versionsnummer');
     });
 
-    test('Vorhandenes Buch aendern, aber ohne Token', async () => {
+    test('Vorhandenes Auto aendern, aber ohne Token', async () => {
         // given
         const headers = new Headers({
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const body = JSON.stringify(geaendertesAuto);
+        const request = new Request(`${autosUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -283,7 +283,7 @@ describe('PUT /api/buecher/:id', () => {
         expect(responseBody).to.be.equalIgnoreCase('unauthorized');
     });
 
-    test('Vorhandenes Buch aendern, aber mit falschem Token', async () => {
+    test('Vorhandenes Auto aendern, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         const headers = new Headers({
@@ -291,8 +291,8 @@ describe('PUT /api/buecher/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const body = JSON.stringify(geaendertesAuto);
+        const request = new Request(`${autosUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,

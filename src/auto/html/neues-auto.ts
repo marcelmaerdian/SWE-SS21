@@ -16,24 +16,17 @@
  */
 
 /**
- * Das Modul besteht aus der Suchfunktion für EJS.
+ * Das Modul besteht aus der Funktion für EJS, um ein neues Auto anzulegen.
  * @packageDocumentation
  */
 
 import type { Request, Response } from 'express';
-import { BuchService } from '../service/buch.service';
-import { logger } from './../../shared/logger';
-
-const buchService = new BuchService();
 
 /**
- * Asynchrone Suchfunktion für EJS, um alle Bücher zu suchen.
- *
- * @param req Request-Objekt von Express mit der URL für EJS
+ * Funktion für EJS, um ein neues Auto anzulegen
+ * @param _ nicht-benutztes Request-Objekt von Express
  * @param res Response-Objekt von Express
  */
-export const suche = async (req: Request, res: Response) => {
-    logger.error('suche(): %s', req.url);
-    const buecher = await buchService.find();
-    res.render('suche', { title: 'Suche', buecher });
+export const neuesAuto = (_: Request, res: Response) => {
+    res.render('neues-auto', { title: 'Neues Auto' });
 };

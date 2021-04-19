@@ -16,3 +16,9 @@ interface BuchData <<entity>> {
     + schlagwoerter?: Array<string>
     + autoren: any
   }
+
+auto.model.ts
+  isbn->seriennummer
+  verlag->hersteller
+  autoren->produktionswerke
+  titel->model

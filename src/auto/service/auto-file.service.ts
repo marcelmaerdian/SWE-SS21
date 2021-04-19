@@ -16,47 +16,47 @@
  */
 
 /**
- * Das Modul besteht aus der Klasse {@linkcode BuchFileService}, damit
+ * Das Modul besteht aus der Klasse {@linkcode AutoFileService}, damit
  * Binärdateien mit dem Treiber von _MongoDB_ in _GridFS_ abgespeichert und
  * ausgelesen werden können.
  * @packageDocumentation
  */
 
-import { BuchNotExists, FileNotFound, MultipleFiles } from './errors';
+import { AutoNotExists, FileNotFound, MultipleFiles } from './errors';
 import { closeMongoDBClient, connectMongoDB, logger, save } from '../../shared';
-import { BuchModel } from '../entity';
-import { BuchService } from './buch.service';
+import { AutoModell } from '../entity';
+import { AutoService } from './auto.service';
 import { GridFSBucket } from 'mongodb';
 import type { ObjectId } from 'mongodb';
 import { Readable } from 'stream';
 
 /* eslint-disable unicorn/no-useless-undefined */
 /**
- * Mit der Klasse {@linkcode BuchFileService} können Binärdateien mit dem
+ * Mit der Klasse {@linkcode AutoFileService} können Binärdateien mit dem
  * Treiber von _MongoDB_ in _GridFS_ abgespeichert und ausgelesen werden.
  */
-export class BuchFileService {
-    private readonly service = new BuchService();
+export class AutoFileService {
+    private readonly service = new AutoService();
 
     /**
      * Asynchrones Abspeichern einer Binärdatei.
      *
-     * @param id ID des zugehörigen Buches, die als Dateiname verwendet wird.
+     * @param id ID des zugehörigen Autoes, die als Dateiname verwendet wird.
      * @param buffer Node-Buffer mit den Binärdaten.
      * @param contentType MIME-Type, z.B. `image/png`.
      * @returns true, falls die Binärdaten abgespeichert wurden. Sonst false.
      */
     async save(id: string, buffer: Buffer, contentType: string | undefined) {
         logger.debug(
-            'BuchFileService.save(): id=%s, contentType=%s',
+            'AutoFileService.save(): id=%s, contentType=%s',
             id,
             contentType,
         );
 
-        // Gibt es ein Buch zur angegebenen ID?
+        // Gibt es ein Auto zur angegebenen ID?
         // eslint-disable-next-line line-comment-position, spaced-comment
-        const buch = await this.service.findById(id); //NOSONAR
-        if (buch === undefined) {
+        const auto = await this.service.findById(id); //NOSONAR
+        if (auto === undefined) {
             return false;
         }
 
@@ -81,12 +81,12 @@ export class BuchFileService {
      * @param filename Der Dateiname der Binärdatei.
      * @returns GridFSBucketReadStream, falls es eine Binärdatei mit dem
      *  angegebenen Dateinamen gibt. Im Fehlerfall ein JSON-Objekt vom Typ:
-     * - {@linkcode BuchNotExists}
+     * - {@linkcode AutoNotExists}
      * - {@linkcode FileNotFound}
      * - {@linkcode MultipleFiles}
      */
     async find(filename: string) {
-        logger.debug('BuchFileService.findFile(): filename=%s', filename);
+        logger.debug('AutoFileService.findFile(): filename=%s', filename);
         const resultCheck = await this.checkFilename(filename);
         if (resultCheck !== undefined) {
             return resultCheck;
@@ -111,18 +111,18 @@ export class BuchFileService {
     }
 
     private async deleteFiles(filename: string, bucket: GridFSBucket) {
-        logger.debug('BuchFileService.deleteFiles(): filename=%s', filename);
+        logger.debug('AutoFileService.deleteFiles(): filename=%s', filename);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/naming-convention
         const idObjects: { _id: ObjectId }[] = await bucket
             .find({ filename })
             .project({ _id: 1 })
             .toArray();
         const ids = idObjects.map((obj) => obj._id);
-        logger.debug('BuchFileService.deleteFiles(): ids=%o', ids);
+        logger.debug('AutoFileService.deleteFiles(): ids=%o', ids);
         ids.forEach((fileId) =>
             bucket.delete(fileId, () =>
                 logger.debug(
-                    'BuchFileService.deleteFiles(): geloeschte ID=%o',
+                    'AutoFileService.deleteFiles(): geloeschte ID=%o',
                     fileId,
                 ),
             ),
@@ -130,22 +130,22 @@ export class BuchFileService {
     }
 
     private async checkFilename(filename: string) {
-        logger.debug('BuchFileService.checkFilename(): filename=%s', filename);
+        logger.debug('AutoFileService.checkFilename(): filename=%s', filename);
 
-        // Gibt es ein Buch mit dem gegebenen "filename" als ID?
+        // Gibt es ein Auto mit dem gegebenen "filename" als ID?
         // eslint-disable-next-line line-comment-position, spaced-comment
-        const buch = await BuchModel.findById(filename); //NOSONAR
+        const auto = await AutoModell.findById(filename); //NOSONAR
         // eslint-disable-next-line no-null/no-null
-        if (buch === null) {
-            const result = new BuchNotExists(filename);
+        if (auto === null) {
+            const result = new AutoNotExists(filename);
             logger.debug(
-                'BuchFileService.checkFilename(): BuchNotExists=%o',
+                'AutoFileService.checkFilename(): AutoNotExists=%o',
                 result,
             );
             return result;
         }
 
-        logger.debug('BuchFileService.checkFilename(): buch=%o', buch);
+        logger.debug('AutoFileService.checkFilename(): auto=%o', auto);
 
         return undefined;
     }
@@ -163,7 +163,7 @@ export class BuchFileService {
             case 0: {
                 const error = new FileNotFound(filename);
                 logger.debug(
-                    'BuchFileService.getContentType(): FileNotFound=%o',
+                    'AutoFileService.getContentType(): FileNotFound=%o',
                     error,
                 );
                 return error;
@@ -174,14 +174,14 @@ export class BuchFileService {
                 if (file === undefined) {
                     const error = new FileNotFound(filename);
                     logger.debug(
-                        'BuchFileService.getContentType(): FileNotFound=%o',
+                        'AutoFileService.getContentType(): FileNotFound=%o',
                         error,
                     );
                     return error;
                 }
                 const { contentType }: { contentType: string } = file.metadata;
                 logger.debug(
-                    'BuchFileService.getContentType(): contentType=%s',
+                    'AutoFileService.getContentType(): contentType=%s',
                     contentType,
                 );
                 return contentType;
@@ -190,7 +190,7 @@ export class BuchFileService {
             default: {
                 const error = new MultipleFiles(filename);
                 logger.debug(
-                    'BuchFileService.getContentType(): MultipleFiles=%o',
+                    'AutoFileService.getContentType(): MultipleFiles=%o',
                     error,
                 );
                 return new MultipleFiles(filename);

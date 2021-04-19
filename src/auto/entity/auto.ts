@@ -16,27 +16,27 @@
  */
 
 /**
- * Das Modul besteht aus dem Interface {@linkcode BuchData} und der Klasse
- * {@linkcode BuchDocument} für Mongoose. Aus dem Interface {@linkcode BuchData}
- * ist das Interface {@linkcode Buch} extrahiert, das an der REST- und
+ * Das Modul besteht aus dem Interface {@linkcode AutoData} und der Klasse
+ * {@linkcode AutoDocument} für Mongoose. Aus dem Interface {@linkcode AutoData}
+ * ist das Interface {@linkcode Auto} extrahiert, das an der REST- und
  * GraphQL-Schnittstelle verwendet wird.
  * @packageDocumentation
  */
 
 /**
- * Alias-Typ für gültige Strings bei Verlagen.
+ * Alias-Typ für gültige Strings bei Herstelleren.
  */
-export type Verlag = 'BAR_VERLAG' | 'FOO_VERLAG';
+export type Hersteller = 'BAR_HERSTELLER' | 'FOO_HERSTELLER';
 
 /**
- * Alias-Typ für gültige Strings bei der Art eines Buches.
+ * Alias-Typ für gültige Strings bei der Art eines Autoes.
  */
-export type BuchArt = 'DRUCKAUSGABE' | 'KINDLE';
+export type AutoArt = 'DRUCKAUSGABE' | 'KINDLE';
 
 /**
  * Gemeinsames Interface für _REST_, _GraphQL_ und _Mongoose_.
  */
-export interface Buch {
+export interface Auto {
     // _id und __v werden bei REST durch HATEOAS und ETag abgedeckt
     // und deshalb beim Response entfernt.
     // Ausserdem wird _id bei einem POST-Request generiert
@@ -44,10 +44,10 @@ export interface Buch {
 
     __v?: number; // eslint-disable-line @typescript-eslint/naming-convention
 
-    readonly titel: string | null | undefined;
+    readonly modell: string | null | undefined;
     readonly rating: number | null | undefined;
-    readonly art: BuchArt | '' | null | undefined;
-    readonly verlag: Verlag | '' | null | undefined;
+    readonly art: AutoArt | '' | null | undefined;
+    readonly hersteller: Hersteller | '' | null | undefined;
     readonly preis: number | undefined;
     readonly rabatt: number | undefined;
     readonly lieferbar: boolean | undefined;
@@ -55,16 +55,16 @@ export interface Buch {
     // string bei REST und Date bei GraphQL sowie Mongoose
     datum: Date | string | undefined;
 
-    readonly isbn: string | null | undefined;
+    readonly seriennummer: string | null | undefined;
     readonly homepage: string | null | undefined;
     readonly schlagwoerter?: string[];
-    readonly autoren: unknown;
+    readonly produktionswerke: unknown;
 }
 
 /**
  * Interface für die Rohdaten aus MongoDB durch die _Mongoose_-Funktion `lean()`.
  */
-export interface BuchData extends Buch {
+export interface AutoData extends Auto {
     // Zeitstempel fuer die MongoDB-Dokumente:
     // wird bei der Rueckgabe aus dem Anwendungskern entfernt
     createdAt?: Date;

@@ -62,7 +62,7 @@ export class RoleService {
             return;
         }
 
-        // Falls der Rollenname in Grossbuchstaben geschrieben ist, wird er
+        // Falls der Rollenname in Grossautostaben geschrieben ist, wird er
         // trotzdem gefunden
         return this.findAllRoles().find(
             (r) => r.toLowerCase() === role.toLowerCase(),

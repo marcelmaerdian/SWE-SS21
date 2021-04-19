@@ -21,7 +21,7 @@
  * @packageDocumentation
  */
 
-export { Buch, BuchArt, BuchData, Verlag } from './buch';
-export { BuchDocument, BuchModel, buchSchema } from './buch.model';
+export { Auto, AutoArt, AutoData, Hersteller } from './auto';
+export { AutoDocument, AutoModell, autoSchema } from './auto.modell';
 export { MAX_RATING } from './jsonSchema';
-export { ValidationErrorMsg, validateBuch } from './validateBuch';
+export { ValidationErrorMsg, validateAuto } from './validateAuto';

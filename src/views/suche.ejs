@@ -33,17 +33,17 @@
           <thead class="thead-default">
             <tr>
               <th>ID</th>
-              <th>Titel</th>
-              <th>Verlag</th>
+              <th>Modell</th>
+              <th>Hersteller</th>
             </tr>
           </thead>
 
           <tbody>
-            <% buecher.forEach((buch) => { %>
+            <% autos.forEach((auto) => { %>
             <tr>
-              <td><%= buch._id %></td>
-              <td><%= buch.titel %></td>
-              <td><%= buch.verlag %></td>
+              <td><%= auto._id %></td>
+              <td><%= auto.modell %></td>
+              <td><%= auto.hersteller %></td>
             </tr>
             <% }); %>
           </tbody>
