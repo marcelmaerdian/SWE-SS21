@@ -42,7 +42,7 @@ const { expect } = chai;
 // -----------------------------------------------------------------------------
 const geaendertesAuto: Omit<Auto, 'seriennummer'> = {
     // seriennummer wird nicht geaendet
-    model: 'Geaendert',
+    modell: 'Geaendert',
     rating: 1,
     art: 'DRUCKAUSGABE',
     produzent: 'FOO_PRODUZENT',
@@ -57,7 +57,7 @@ const geaendertesAuto: Omit<Auto, 'seriennummer'> = {
 const idVorhanden = '00000000-0000-0000-0000-000000000003';
 
 const geaendertesAutoIdNichtVorhanden: Omit<Auto, 'seriennummer' | 'homepage'> = {
-    model: 'Nichtvorhanden',
+    modell: 'Nichtvorhanden',
     rating: 1,
     art: 'DRUCKAUSGABE',
     produzent: 'FOO_PRODUZENT',

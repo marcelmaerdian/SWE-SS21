@@ -41,7 +41,7 @@ const { expect } = chai;
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const neuesAuto: Auto = {
-    model: 'Neu',
+    modell: 'Neu',
     rating: 1,
     art: 'DRUCKAUSGABE',
     produzent: 'FOO_PRODUZENT',
@@ -55,7 +55,7 @@ const neuesAuto: Auto = {
     produktionswerke: [{ nachname: 'Test', vorname: 'Theo' }],
 };
 const neuesAutoInvalid: object = {
-    model: 'Blabla',
+    modell: 'Blabla',
     rating: -1,
     art: 'UNSICHTBAR',
     produzent: 'NO_PRODUZENT',
@@ -68,7 +68,7 @@ const neuesAutoInvalid: object = {
     schlagwoerter: [],
 };
 const neuesAutoModelExistiert: Auto = {
-    model: 'Alpha',
+    modell: 'Alpha',
     rating: 1,
     art: 'DRUCKAUSGABE',
     produzent: 'FOO_PRODUZENT',

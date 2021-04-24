@@ -102,7 +102,7 @@ describe('GET /api/autos', () => {
             expect(body).not.to.be.empty;
 
             // Jedes Auto hat einen Model mit dem Teilstring 'a'
-            body.map((auto: Auto) => auto.model).forEach((model: string) =>
+            body.map((auto: Auto) => auto.modell).forEach((model: string) =>
                 expect(model.toLowerCase()).to.have.string(teilModel),
             );
         },
