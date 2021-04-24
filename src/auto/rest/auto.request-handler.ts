@@ -30,8 +30,8 @@ import {
     AutoNotExists,
     AutoService,
     AutoServiceError,
-    SeriennummerExists,
     ModellExists,
+    SeriennummerExists,
     VersionInvalid,
     VersionOutdated,
 } from '../service';
@@ -348,7 +348,10 @@ export class AutoRequestHandler {
         res: Response,
     ) {
         const msg = `Die Seriennummer "${seriennummer}" existiert bereits bei ${id}.`;
-        logger.debug('AutoRequestHandler.handleSeriennummerExists(): msg=%s', msg);
+        logger.debug(
+            'AutoRequestHandler.handleSeriennummerExists(): msg=%s',
+            msg,
+        );
         res.status(HttpStatus.BAD_REQUEST)
             .set('Content-Type', 'text/plain')
             .send(msg);
