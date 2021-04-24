@@ -67,7 +67,7 @@ export class SeriennummerExists extends AutoServiceError {
 /**
  * Union-Type für Fehler beim Neuanlegen eines Autoes.
  */
-export type CreateError = AutoInvalid | SeriennummerExists | ModellExists;
+export type CreateError = AutoInvalid | ModellExists | SeriennummerExists;
 
 /**
  * Klasse für eine ungültige Versionsnummer beim Ändern.
