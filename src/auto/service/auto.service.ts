@@ -27,8 +27,8 @@ import {
     AutoInvalid,
     AutoNotExists,
     AutoServiceError,
-    SeriennummerExists,
     ModellExists,
+    SeriennummerExists,
     VersionInvalid,
     VersionOutdated,
 } from './errors';
@@ -172,7 +172,7 @@ export class AutoService {
      */
     async create(
         auto: Auto,
-    ): Promise<AutoInvalid | SeriennummerExists | ModellExists | string> {
+    ): Promise<AutoInvalid | ModellExists | SeriennummerExists | string> {
         logger.debug('AutoService.create(): auto=%o', auto);
         const validateResult = await this.validateCreate(auto);
         if (validateResult instanceof AutoServiceError) {
@@ -381,7 +381,10 @@ export class AutoService {
         const { modell } = auto;
 
         // Pattern "Active Record" (urspruengl. von Ruby-on-Rails)
-        const result = await AutoModell.findOne({ modell }, { _id: true }).lean();
+        const result = await AutoModell.findOne(
+            { modell },
+            { _id: true },
+        ).lean();
         if (result !== null) {
             const id = result._id;
             logger.debug('AutoService.checkModellExists(): _id=%s', id);
