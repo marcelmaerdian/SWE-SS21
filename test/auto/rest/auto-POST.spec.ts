@@ -253,5 +253,5 @@ describe('POST /api/autos', () => {
         expect(responseBody).to.be.equalIgnoreCase('unauthorized');
     });
 
-    test.todo('Test mit abgelaufenem Token');
+    //TODO test.todo('Test mit abgelaufenem Token');
 });
