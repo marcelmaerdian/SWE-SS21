@@ -23,7 +23,7 @@
 apiVersion: skaffold/v2beta13
 kind: Config
 metadata:
-  name: buch
+  name: auto
 # https://skaffold.dev/docs/pipeline-stages/builders
 build:
   # https://skaffold.dev/docs/pipeline-stages/taggers
@@ -31,7 +31,7 @@ build:
     envTemplate:
       template: "{{.TAG}}"
   artifacts:
-  - image: docker.io/juergenzimmermann/buch
+  - image: docker.io/juergenzimmermann/auto
     # https://skaffold.dev/docs/pipeline-stages/builders/docker
   local: {}
 deploy:
@@ -53,5 +53,5 @@ profiles:
     # https://skaffold.dev/docs/pipeline-stages/port-forwarding
     portForward:
       - resourceType: service
-        resourceName: buch
+        resourceName: auto
         port: 3000

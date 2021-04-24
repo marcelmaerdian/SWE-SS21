@@ -18,7 +18,7 @@
 import { exec } from 'shelljs';
 
 const dockerAccount = 'juergenzimmermann';
-const imageName = 'buch';
+const imageName = 'auto';
 const imageTag = '1.0.0';
 
 const image = `docker.io/${dockerAccount}/${imageName}:${imageTag}`;

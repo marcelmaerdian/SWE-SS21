@@ -1,0 +1,72 @@
+// Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+//
+// N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
+//
+
+### Suche id, modell, art und version von allen Autosn
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+{
+  autos {
+    id
+    modell
+    art
+    version
+  }
+}
+
+### Suche modell, art, isbn und version von einem Auto mit vorhandener Auto-ID
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+{
+  auto(id: "00000000-0000-0000-0000-000000000001") {
+    modell
+    art
+    isbn
+    version
+  }
+}
+
+### Suche modell und art von Autosn mit vorhandenem Modell
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+{
+  autos(modell: "Alpha") {
+    modell
+    art
+  }
+}
+
+
+### Suche modell, art und schlagwoerter von Autosn mit vorhandenem Modell
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+{
+  autos(modell: "a") {
+    modell
+    art
+    schlagwoerter
+  }
+}

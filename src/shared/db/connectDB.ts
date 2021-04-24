@@ -40,7 +40,7 @@ const useCreateIndex = true;
 // MongoDB hat eine neue "Server Discover and Monitoring engine"
 const useUnifiedTopology = true;
 
-// Name eines mongoose-Models = Name der Collection
+// Name eines mongoose-Modells = Name der Collection
 // https://github.com/Automattic/mongoose/issues/5947#issuecomment-354381167
 // eslint-disable-next-line line-comment-position, spaced-comment, unicorn/no-useless-undefined
 pluralize(undefined); //NOSONAR
