@@ -182,7 +182,7 @@ describe('POST /api/autos', () => {
             'Der Produzent eines Autoes muss FOO_PRODUZENT oder BAR_PRODUZENT sein.',
         );
         expect(datum).to.be.equal('Das Datum muss im Format yyyy-MM-dd sein.');
-        expect(seriennummer).to.be.equal('Die SERIENNUMMER-Nummer ist nicht korrekt.');
+        expect(seriennummer).to.be.equal('Die Seriennummer ist nicht korrekt.');
     });
 
     test('Neues Auto, aber der Model existiert bereits', async () => {

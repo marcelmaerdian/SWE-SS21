@@ -53,7 +53,7 @@ export class ModellExists extends AutoServiceError {
 }
 
 /**
- * Klasse für eine bereits existierende SERIENNUMMER-Nummer.
+ * Klasse für eine bereits existierende Seriennummer.
  */
 export class SeriennummerExists extends AutoServiceError {
     constructor(

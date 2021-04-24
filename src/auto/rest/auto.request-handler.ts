@@ -195,7 +195,7 @@ export class AutoRequestHandler {
      * dass damit das neu angelegte Auto abgerufen werden kann.
      *
      * Falls Constraints verletzt sind, wird der Statuscode `400` (`Bad Request`)
-     * gesetzt und genauso auch wenn der Modell oder die SERIENNUMMER-Nummer bereits
+     * gesetzt und genauso auch wenn der Modell oder die Seriennummer bereits
      * existieren.
      *
      * @param req Request-Objekt von Express.
@@ -244,7 +244,7 @@ export class AutoRequestHandler {
      * required`) gesetzt; und falls sie nicht korrekt ist, der Statuscode `412`
      * (`Precondition failed`). Falls Constraints verletzt sind, wird der
      * Statuscode `400` (`Bad Request`) gesetzt und genauso auch wenn der neue
-     * Modell oder die neue SERIENNUMMER-Nummer bereits existieren.
+     * Modell oder die neue Seriennummer bereits existieren.
      *
      * @param req Request-Objekt von Express.
      * @param res Leeres Response-Objekt von Express.
@@ -347,7 +347,7 @@ export class AutoRequestHandler {
         id: string | undefined,
         res: Response,
     ) {
-        const msg = `Die SERIENNUMMER-Nummer "${seriennummer}" existiert bereits bei ${id}.`;
+        const msg = `Die Seriennummer "${seriennummer}" existiert bereits bei ${id}.`;
         logger.debug('AutoRequestHandler.handleSeriennummerExists(): msg=%s', msg);
         res.status(HttpStatus.BAD_REQUEST)
             .set('Content-Type', 'text/plain')
