@@ -409,7 +409,7 @@ und Mailserver erfolgreich gestartet sind (s.o.).
 
 Im Verzeichnis `kubernetes\dev` ist eine Konfiguration für die Entwicklung
 des Appservers. Wenn das Docker-Image erstellt ist (s.o.), kann das Deployment
-in Kubernetes folgendermaßen durchgeführt werden, was man z.B. mit _Lens_ ode
+in Kubernetes folgendermaßen durchgeführt werden, was man z.B. mit _Lens_ oder
  _Octant_ inspizieren kann. Dabei wird die Logdatei im internen Verzeichnis
 `/var/log/node` angelegt, welches durch _Mounting_ dem Windows-Verzeichnis
 `C:\Zimmermann\volumes\auto` entspricht und mit _Schreibberechtigung_ existieren
