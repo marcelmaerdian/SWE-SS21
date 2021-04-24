@@ -85,10 +85,10 @@ describe('GET /api/autos', () => {
     });
 
     each(modelVorhanden).test(
-        'Autos mit einem Model, der "%s" enthaelt',
+        'Autos mit einem Modell, das "%s" enthaelt',
         async (teilModel) => {
             // given
-            const uri = `${autosUri}?model=${teilModel}`;
+            const uri = `${autosUri}?modell=${teilModel}`;
 
             // when
             const response = await fetch(uri, { agent });
@@ -101,7 +101,7 @@ describe('GET /api/autos', () => {
             const body = await response.json();
             expect(body).not.to.be.empty;
 
-            // Jedes Auto hat einen Model mit dem Teilstring 'a'
+            // Jedes Auto hat einen Modell mit dem Teilstring 'a'
             body.map((auto: Auto) => auto.modell).forEach((model: string) =>
                 expect(model.toLowerCase()).to.have.string(teilModel),
             );
@@ -109,10 +109,10 @@ describe('GET /api/autos', () => {
     );
 
     each(modelNichtVorhanden).test(
-        'Keine Autos mit einem Model, der "%s" nicht enthaelt',
+        'Keine Autos mit einem Modell, das "%s" nicht enthaelt',
         async (teilModel) => {
             // given
-            const uri = `${autosUri}?model=${teilModel}`;
+            const uri = `${autosUri}?modell=${teilModel}`;
 
             // when
             const response = await fetch(uri, { agent });
