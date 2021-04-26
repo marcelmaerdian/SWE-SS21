@@ -17,7 +17,7 @@
     "asciidoc": "ts-node scripts/asciidoc",
     "clinic": "clinic doctor -- node dist/server.js",
     "clean": "ts-node scripts/clean",
-    "curl:heroku": "curl --include --tlsv1.2 --insecure https://gener-iert-12345.herokuapp.com/autos/00000000-0000-0000-0000-000000000001",
+    "curl:heroku": "curl --include --tlsv1.2 --insecure https://afternoon-chamber-94999.herokuapp.com/autos/00000000-0000-0000-0000-000000000001",
     "curl:openshift": "curl --include http://beispiel-jz.apps.us-east-1.starter.openshift-online.com:3000/autos/00000000-0000-0000-0000-000000000001",
     "depcheck": "depcheck",
     "deploy:heroku": "git push heroku master",
