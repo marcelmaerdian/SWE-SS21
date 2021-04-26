@@ -38,3 +38,6 @@ yarn.lock
 # System Dateien
 .DS_Store
 Thumbs.db
+
+# Sonstiges
+package.json
