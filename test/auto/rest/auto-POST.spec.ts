@@ -170,7 +170,13 @@ describe('POST /api/autos', () => {
 
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
-        const { art, rating, produzent, datum, seriennummer } = await response.json();
+        const {
+            art,
+            rating,
+            produzent,
+            datum,
+            seriennummer,
+        } = await response.json();
 
         expect(art).to.be.equal(
             'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.',
