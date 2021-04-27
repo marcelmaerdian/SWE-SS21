@@ -60,9 +60,9 @@ include::komponenten.puml[]
 Im folgenden Schaubild erhalten Sie einen näheren Überblick über den Aufbau der REST-Schnittstelle.
 
 .Handler für die REST-Schnittstelle
-[plantuml,FilmHandler,svg]
+[plantuml,AutoHandler,svg]
 ----
-include::FilmHandler.puml[]
+include::AutoHandler.puml[]
 ----
 
 === Der Anwendungskern
@@ -72,7 +72,7 @@ Der Anwendungskern im Schaubild.
 .Anwendungskern mit Mongoose
 [plantuml,FilmService,svg]
 ----
-include::FilmService.puml[]
+include::AutoService.puml[]
 ----
 
 === Interface für Entities und das Mongoose-Model
@@ -82,7 +82,7 @@ Im folgenden Schaubild sehen Sie das Interface für die Entities und das Mongoos
 .Entity, Model und Schema
 [plantuml,Film,svg]
 ----
-include::Film.puml[]
+include::Auto.puml[]
 ----
 
 == Programmierrichtlinien für TypeScript und JavaScript

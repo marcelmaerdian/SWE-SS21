@@ -19,9 +19,9 @@
 
 // https://asciidoctor.org/docs/asciidoctor-revealjs
 
-= Der Aufbau unseres Projektes "FILM" in der Übersicht
+= Der Aufbau unseres Projektes "AUTO" in der Übersicht
 
-Gruppe 11 - Hildenbrand, Märdian, Nguyen, Schröder
+Gruppe 09 - Märdian, Fenz, Tschepke, Walla
 
 == Gliederung
 
