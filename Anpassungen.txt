@@ -92,20 +92,20 @@ Yannick -> alle Dateien
 [x] Projektplanung mit Project Professional (MIT ANKÜNDIGUNG ABGABETERMINS)
 [x] Kommandos in einer Powershell: hostname und date
 [ ] Zeiterfassung mit z.B. einem einfachen Excelsheet
-[ ] REST-Schnittstelle einschl. ETags, Location-Header sowie HATEOAS mit Lesen und Schreiben einschl. Validierung
-[ ] GraphQL-Schnittstelle mit Lesen und Schreiben
-[?] Visualisierung jeweils von Request und Response
+[x] REST-Schnittstelle einschl. ETags, Location-Header sowie HATEOAS mit Lesen und Schreiben einschl. Validierung
+[x] GraphQL-Schnittstelle mit Lesen und Schreiben
+[x] Visualisierung jeweils von Request und Response
 [~] ESLint, Prettier und SonarQube
 [x] DB-Zugriff (Visualisierung der persistenten Daten nicht vergessen)
-[?] Security (Visualisierung des Zugriffsschutzes nicht vergessen)
+[x] Security (Visualisierung des Zugriffsschutzes nicht vergessen)
 [x] Integrationstests (einschl. 400er Fehler) mit Test-Coverage
 [x] Git
 [x] Hadolint für das eigene Dockerfile
 [x] Eigenes Image in Docker Desktop
-[ ] Dive mit dem eigenen Image
+[x] Dive mit dem eigenen Image
 [x] Deployment mit Skaffold oder Kustomize
 [x] Deployment mit Heroku
 [~] Jenkins (ohne Tests)
-[ ] Einfache Dokumentation mit AsciiDoctor und PlantUML
+[X] Einfache Dokumentation mit AsciiDoctor und PlantUML
 [ ] API-Dokumentation mit TypeDoc
-[ ] Einfacher Foliensatz mit revealjs
+[~] Einfacher Foliensatz mit revealjs
