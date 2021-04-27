@@ -42,9 +42,9 @@ pipeline {
     // Umgebungsvariable:
     environment {
         // Atlas:
-        DB_HOST = 'cluster0.0eq6f.mongodb.net'
-        DB_USER = 'user_atlas'
-        DB_PASS = 'password_atlas'
+        DB_HOST = 'cluster0.rc8na.mongodb.net'
+        DB_USER = 'admin'
+        DB_PASS = 'p'
         DB_POPULATE = true
         DB_POPULATE_FILES = true
 
@@ -76,7 +76,7 @@ pipeline {
 
                 // https://www.jenkins.io/doc/pipeline/steps/git
                 // "named arguments" statt Funktionsaufruf mit Klammern
-                git url: 'file:///git-repository/beispiel', branch: 'main', poll: true
+                git url: 'https://github.com/mama1113/SWE-SS21.git', branch: 'master', poll: true
             }
         }
 
