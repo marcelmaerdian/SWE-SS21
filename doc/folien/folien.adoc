@@ -1,0 +1,72 @@
+:revealjsdir: ../../node_modules/reveal.js
+:revealjs_slideNumber: true
+:sectnums:
+
+// Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+// https://asciidoctor.org/docs/asciidoctor-revealjs
+
+= Der Aufbau unseres Projektes "FILM" in der Übersicht
+
+Gruppe 11 - Hildenbrand, Märdian, Nguyen, Schröder
+
+== Gliederung
+
+* Der allgemeine Projektaufbau
+** Die Entwicklungsumgebung
+** Die eingesetzten Werkzeuge
+* Durchführung der Projektplanung
+* Das Starten der verschiedenen Server
+** Mailserver, Applikationsserver, Jenkins, SonarQube
+
+== Der allgemeine Projektaufbau
+=== Die Entwicklungsumgebung
+
+* VS Code
+* RESTful Web Service
+* GraphQL
+
+=== Die eingesetzten Werkzeuge
+
+* ESLint, Prettier und SonarQube
+* Mongoose, Express
+* MongoDB, MongoDBCompass bzw. MongoDB Atlas
+* Jenkins
+* Heroku
+* GitHub
+
+== Durchführung der Projektplanung
+
+* Die Zeiterfassung der Teammitglieder erfolgte über MS Excel
+* Die Projektplanung erfolgte mit Project Professional 
+
+== Das Starten der verschiedenen Server
+
+=== Mailserver
+
+* npm run mailserver
+
+=== Applikationsserver
+
+* npm run docker
+
+=== Jenkins
+
+* npm run jenkins
+
+=== SonarQube
+
+* npm run sonarqube

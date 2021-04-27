@@ -1,0 +1,76 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+@startuml Anwendungskern
+
+!pragma useNewPackage
+skinparam classAttributeIconSize 0
+skinparam componentStyle uml2
+
+package mongoose {
+  class Schema
+
+  class "model()" as model
+  hide model circle
+}
+
+package film.entity {
+  class "validateFilm()" as validateFilm
+  hide validateFilm circle
+
+  class FilmModel
+  hide FilmModel circle
+
+  FilmModel ..> Schema
+  FilmModel ..> model
+  FilmModel ..> validateFilm
+
+  FilmData ..> FilmArt
+  FilmData ..> Produktion
+
+  enum FilmArt {
+    DREIDIMENSIONAL
+    ZWEIDIMENSIONAL
+  }
+
+  enum Produktion {
+    CONSTANTIN_FILM
+    BIG_PRODUKTION
+  }
+
+  interface FilmData <<entity>> {
+    + _id?: string
+    + __v?: number
+    + createdAt?: number
+    + updatedAt?: number
+    + titel: string
+    + rating?: number
+    + art?: FilmArt
+    + produktion: Produktion
+    + preis: number
+    + rabatt?: number
+    + lieferbar?: boolean
+    + datum?: Date
+    + prodnr: string
+    + homepage?: string
+    + schlagwoerter?: Array<string>
+    + regisseure: any
+  }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml
