@@ -21,13 +21,13 @@ skinparam componentStyle uml2
 actor Gast
 actor Admin
 
-rectangle kunde {
-    Gast --> (Film suchen)
+rectangle auto {
+    Gast --> (Auto suchen)
     Gast --> (Datei herunterladen)
-    Admin --> (Film suchen)
-    Admin --> (Film anlegen)
-    Admin --> (Film ändern)
-    Admin --> (Film löschen)
+    Admin --> (Auto suchen)
+    Admin --> (Auto anlegen)
+    Admin --> (Auto ändern)
+    Admin --> (Auto löschen)
     Admin --> (Datei hochladen)
     Admin --> (Datei herunterladen)
 }

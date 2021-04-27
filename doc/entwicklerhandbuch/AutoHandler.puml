@@ -38,14 +38,14 @@ class App <<boudary>> {
 App ..> Express
 App ..> express
 
-package film {
+package auto {
   package entity {
-    interface FilmData <<entity>> {
+    interface AutoData <<entity>> {
     }
   }
 
   package service {
-    class FilmService << control >> {
+    class AutoService << control >> {
     }
   }
 
@@ -53,13 +53,13 @@ package film {
     "Handler Functions" .right.> Request
     "Handler Functions" ..> Response
     "Handler Functions" ..> Promise
-    "Handler Functions" ..> FilmHandler
+    "Handler Functions" ..> AutoHandler
 
-    FilmHandler o--> "1" FilmService : service
-    FilmHandler .right.> Request
-    FilmHandler ..> Response
-    FilmHandler ..> FilmData
-    FilmHandler ..> Promise
+    AutoHandler o--> "1" AutoService : service
+    AutoHandler .right.> Request
+    AutoHandler ..> Response
+    AutoHandler ..> AutoData
+    AutoHandler ..> Promise
 
     class "Handler Functions" << boundary >> {
       + async findById(req: Request, res: Response): Promise<void>
@@ -70,7 +70,7 @@ package film {
     }
     hide "Handler Functions" << boundary >> circle
 
-    class FilmHandler << control >> {
+    class AutoHandler << control >> {
       + async findById(req: Request, res: Response): Promise<void>
       + async find(req: Request, res: Response): Promise<void>
       + async create(req: Request, res: Response): Promise<void>

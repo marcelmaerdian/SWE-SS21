@@ -25,29 +25,29 @@ package shared {
   hide sendMail circle
 }
 
-package film {
+package auto {
   package entity {
-    class FilmModel
-    hide FilmModel circle
+    class AutoModel
+    hide AutoModel circle
 
-    class "validateFilm()" as validateFilm
-    hide validateFilm circle
+    class "validateAuto()" as validateAuto
+    hide validateAuto circle
 
-    interface FilmData <<entity>>
+    interface AutoData <<entity>>
   }
 
   package service #DDDDDD {
-    FilmService ..> Promise
-    FilmService ..> FilmModel
-    FilmService ..> FilmData
-    FilmService ..> validateFilm
-    FilmService ..> sendMail
+    AutoService ..> Promise
+    AutoService ..> AutoModel
+    AutoService ..> AutoData
+    AutoService ..> validateAuto
+    AutoService ..> sendMail
 
-    class FilmService << control >> {
-      + async findById(id: string): Promise<FilmData | undefined>
-      + async find(query?: any): Promise<Array<FilmData>>
-      + async create(film: FilmData): Promise<FilmData>
-      + async update(film: FilmData, version: string): Promise<FilmData>
+    class AutoService << control >> {
+      + async findById(id: string): Promise<AutoData | undefined>
+      + async find(query?: any): Promise<Array<AutoData>>
+      + async create(auto: FilmData): Promise<AutoData>
+      + async update(auto: FilmData, version: string): Promise<AutoData>
       + async delete(id: string): Promise<boolean>
     }
   }

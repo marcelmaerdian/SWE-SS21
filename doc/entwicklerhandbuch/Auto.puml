@@ -25,21 +25,21 @@ package mongoose {
   hide model circle
 }
 
-package film.entity {
-  class "validateFilm()" as validateFilm
-  hide validateFilm circle
+package auto.entity {
+  class "validateAuto()" as validateAuto
+  hide validateAuto circle
 
-  class FilmModel
-  hide FilmModel circle
+  class AutoModel
+  hide AutoModel circle
 
-  FilmModel ..> Schema
-  FilmModel ..> model
-  FilmModel ..> validateFilm
+  AutoModel ..> Schema
+  AutoModel ..> model
+  AutoModel ..> validateAuto
 
-  FilmData ..> FilmArt
-  FilmData ..> Produktion
+  AutoData ..> AutoArt
+  AutoData ..> Produktion
 
-  enum FilmArt {
+  enum AutoArt {
     DREIDIMENSIONAL
     ZWEIDIMENSIONAL
   }
@@ -49,7 +49,7 @@ package film.entity {
     BIG_PRODUKTION
   }
 
-  interface FilmData <<entity>> {
+  interface AutoData <<entity>> {
     + _id?: string
     + __v?: number
     + createdAt?: number

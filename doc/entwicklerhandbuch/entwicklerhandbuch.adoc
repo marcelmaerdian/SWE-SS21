@@ -14,7 +14,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 = Entwicklerhandbuch
-Gruppe 11
+Gruppe 09
 :doctype: book
 :toc: left
 :sectanchors:
@@ -70,7 +70,7 @@ include::AutoHandler.puml[]
 Der Anwendungskern im Schaubild. 
 
 .Anwendungskern mit Mongoose
-[plantuml,FilmService,svg]
+[plantuml,Autoervice,svg]
 ----
 include::AutoService.puml[]
 ----
@@ -80,7 +80,7 @@ include::AutoService.puml[]
 Im folgenden Schaubild sehen Sie das Interface für die Entities und das Mongoose-Model.
 
 .Entity, Model und Schema
-[plantuml,Film,svg]
+[plantuml,Auto,svg]
 ----
 include::Auto.puml[]
 ----

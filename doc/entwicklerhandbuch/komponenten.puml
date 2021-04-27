@@ -26,16 +26,16 @@ node "Funktionen mit Express" {
 }
 
 node "Klassen / objektorientiert" {
-  [FilmHandler]
-  [FilmFileHandler]
+  [AutoHandler]
+  [AutoFileHandler]
 
-  [FilmService]
-  [FilmFileService]
+  [AutoService]
+  [AutoFileService]
 }
 
 [sendMail()] as sendMail
 
-entity FilmModel
+entity AutoModel
 
 cloud {
     [Mongoose]
@@ -61,21 +61,21 @@ node {
 
 RESTClient ~~> [Router]
 [Router] ..> [Handler Functions]
-[Handler Functions] ..> [FilmHandler]
-[Handler Functions] ..> [FilmFileHandler]
+[Handler Functions] ..> [AutoHandler]
+[Handler Functions] ..> [AutoFileHandler]
 
-[FilmHandler] --> [FilmService]
-[FilmFileHandler] --> [FilmFileService]
-[FilmService] ..> [FilmModel]
-[FilmFileService] ..> [FilmModel]
+[AutoHandler] --> [AutoService]
+[AutoFileHandler] --> [AutoFileService]
+[AutoService] ..> [AutoModel]
+[AutoFileService] ..> [AutoModel]
 
-[FilmModel] ~~> [Mongoose]
-[FilmFileService] ~~> [MongDB\nNative Driver]
+[AutoModel] ~~> [Mongoose]
+[AutiFileService] ~~> [MongDB\nNative Driver]
 [sendMail] ~~> [nodemailer]
 [Mongoose] ~~> [Collection Film]
 [MongDB\nNative Driver] ~~> [GridFS]
 
-[FilmService] --> [sendMail]
+[AutoService] --> [sendMail]
 [nodemailer] ~~> [Mailserver]
 
 footer (c) Jürgen Zimmermann
