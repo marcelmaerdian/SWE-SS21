@@ -52,12 +52,12 @@ Authorization: Bearer {{login.response.body.$.token}}
 
 < .\json\auto-neu.modell-exists.json
 
-### Neues Auto anlegen, aber die ISBN-Nummer existiert bereits
+### Neues Auto anlegen, aber die SERIENNUMMER-Nummer existiert bereits
 POST {{restUrl}}/autos
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\auto-neu.isbn-exists.json
+< .\json\auto-neu.seriennummer-exists.json
 
 ### Neues Auto ohne Login anlegen
 POST {{restUrl}}/autos

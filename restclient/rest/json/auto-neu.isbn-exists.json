@@ -7,7 +7,7 @@
   "rabatt": 0.1,
   "lieferbar": true,
   "datum": "2020-02-01",
-  "isbn": "978-3897225831",
+  "seriennummer": "978-3897225831",
   "homepage": "https://test.de/",
   "schlagwoerter": ["JAVASCRIPT", "TYPESCRIPT"],
   "produktionswerken": [

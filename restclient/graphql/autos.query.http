@@ -31,7 +31,7 @@ X-REQUEST-TYPE: GraphQL
   }
 }
 
-### Suche modell, art, isbn und version von einem Auto mit vorhandener Auto-ID
+### Suche modell, art, seriennummer und version von einem Auto mit vorhandener Auto-ID
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -40,7 +40,7 @@ X-REQUEST-TYPE: GraphQL
   auto(id: "00000000-0000-0000-0000-000000000001") {
     modell
     art
-    isbn
+    seriennummer
     version
   }
 }
