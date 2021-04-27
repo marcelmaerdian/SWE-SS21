@@ -62,7 +62,7 @@ services:
       - type: bind
         source: .
         # siehe "Repository URL" in der Job-Definition
-        target: /git-repository/beispiel
+        target: https://github.com/mama1113/SWE-SS21
         read_only: true
     networks: ["jenkins"]
     environment:
