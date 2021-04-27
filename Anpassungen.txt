@@ -90,22 +90,22 @@ Rouven -> src und test
 Yannick -> alle Dateien
 
 [x] Projektplanung mit Project Professional (MIT ANKÜNDIGUNG ABGABETERMINS)
-[ ] Kommandos in einer Powershell: hostname und date
+[x] Kommandos in einer Powershell: hostname und date
 [ ] Zeiterfassung mit z.B. einem einfachen Excelsheet
 [ ] REST-Schnittstelle einschl. ETags, Location-Header sowie HATEOAS mit Lesen und Schreiben einschl. Validierung
 [ ] GraphQL-Schnittstelle mit Lesen und Schreiben
-[ ] Visualisierung jeweils von Request und Response
-[ ] ESLint, Prettier und SonarQube
-[ ] DB-Zugriff (Visualisierung der persistenten Daten nicht vergessen)
-[ ] Security (Visualisierung des Zugriffsschutzes nicht vergessen)
-[ ] Integrationstests (einschl. 400er Fehler) mit Test-Coverage
-[ ] Git
-[ ] Hadolint für das eigene Dockerfile
-[ ] Eigenes Image in Docker Desktop
+[?] Visualisierung jeweils von Request und Response
+[~] ESLint, Prettier und SonarQube
+[x] DB-Zugriff (Visualisierung der persistenten Daten nicht vergessen)
+[?] Security (Visualisierung des Zugriffsschutzes nicht vergessen)
+[x] Integrationstests (einschl. 400er Fehler) mit Test-Coverage
+[x] Git
+[x] Hadolint für das eigene Dockerfile
+[x] Eigenes Image in Docker Desktop
 [ ] Dive mit dem eigenen Image
-[ ] Deployment mit Skaffold oder Kustomize
-[ ] Deployment mit Heroku
-[ ] Jenkins (ohne Tests)
+[x] Deployment mit Skaffold oder Kustomize
+[x] Deployment mit Heroku
+[~] Jenkins (ohne Tests)
 [ ] Einfache Dokumentation mit AsciiDoctor und PlantUML
 [ ] API-Dokumentation mit TypeDoc
 [ ] Einfacher Foliensatz mit revealjs
