@@ -2,7 +2,7 @@
   "modell": "Geaendert",
   "rating": 5,
   "art": "KINDLE",
-  "produzent": "FOO_VERLAG",
+  "produzent": "FOO_PRODUZENT",
   "preis": 9999,
   "rabatt": 0.99,
   "lieferbar": true,

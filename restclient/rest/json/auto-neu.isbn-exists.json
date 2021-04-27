@@ -2,7 +2,7 @@
   "modell": "Test",
   "rating": 1,
   "art": "KINDLE",
-  "produzent": "FOO_VERLAG",
+  "produzent": "FOO_PRODUZENT",
   "preis": 99.9,
   "rabatt": 0.1,
   "lieferbar": true,

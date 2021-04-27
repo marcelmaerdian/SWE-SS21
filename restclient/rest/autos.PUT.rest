@@ -32,7 +32,7 @@ Content-Type: application/x-www-form-urlencoded
 username=admin&password=FALSCH
 
 ### Vorhandenes Auto aktualisieren
-PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
+PUT {{restUrl}}/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 If-Match: "0"
@@ -40,7 +40,7 @@ If-Match: "0"
 < .\json\auto-3-put.json
 
 ### NICHT-Vorhandenes Auto aktualisieren
-PUT {{restUrl}}/autos/99999999-9999-9999-9999-999999999999
+PUT {{restUrl}}/99999999-9999-9999-9999-999999999999
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 If-Match: "0"
@@ -48,14 +48,14 @@ If-Match: "0"
 < .\json\auto-3-put.json
 
 ### Vorhandenes Auto *OHNE* Versionsnummer aktualisieren
-PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
+PUT {{restUrl}}/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
 < .\json\auto-3-put.json
 
 ### Vorhandenes Auto mit falscher Versionsnummer aktualisieren
-PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
+PUT {{restUrl}}/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 If-Match: 0
 Authorization: Bearer {{login.response.body.$.token}}
@@ -63,7 +63,7 @@ Authorization: Bearer {{login.response.body.$.token}}
 < .\json\auto-3-put.json
 
 ### Vorhandenes Auto mit alter Versionsnummer aktualisieren
-PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
+PUT {{restUrl}}/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 If-Match: "-1"
 Authorization: Bearer {{login.response.body.$.token}}
@@ -71,7 +71,7 @@ Authorization: Bearer {{login.response.body.$.token}}
 < .\json\auto-3-put.json
 
 ### Vorhandenes Auto mit ungueltigen Daten aktualisieren
-PUT {{restUrl}}/autos/00000000-0000-0000-0000-000000000003
+PUT {{restUrl}}/00000000-0000-0000-0000-000000000003
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 If-Match: "0"
