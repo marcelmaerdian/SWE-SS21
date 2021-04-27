@@ -56,7 +56,10 @@ const geaendertesAuto: Omit<Auto, 'seriennummer'> = {
 };
 const idVorhanden = '00000000-0000-0000-0000-000000000003';
 
-const geaendertesAutoIdNichtVorhanden: Omit<Auto, 'seriennummer' | 'homepage'> = {
+const geaendertesAutoIdNichtVorhanden: Omit<
+    Auto,
+    'seriennummer' | 'homepage'
+> = {
     modell: 'Nichtvorhanden',
     rating: 1,
     art: 'DRUCKAUSGABE',
@@ -197,7 +200,13 @@ describe('PUT /api/autos/:id', () => {
 
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
-        const { art, rating, produzent, datum, seriennummer } = await response.json();
+        const {
+            art,
+            rating,
+            produzent,
+            datum,
+            seriennummer,
+        } = await response.json();
         expect(art).to.be.equal(
             'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.',
         );
