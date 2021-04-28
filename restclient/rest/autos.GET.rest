@@ -56,7 +56,7 @@ GET {{restUrl}}?javascript=true
 GET {{restUrl}}?typescript=true
 
 ### Suche mit gueltiger Autoart
-GET {{restUrl}}?art=KINDLE
+GET {{restUrl}}?art=SUV
 
 ### Suche mit gueltigem Rating
 GET {{restUrl}}?rating=1

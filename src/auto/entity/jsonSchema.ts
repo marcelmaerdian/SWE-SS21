@@ -31,7 +31,7 @@ export const jsonSchema: GenericJsonSchema = {
         },
         art: {
             type: 'string',
-            enum: ['DRUCKAUSGABE', 'KINDLE', ''],
+            enum: ['CABRIO', 'SUV', ''],
         },
         produzent: {
             type: 'string',

@@ -43,7 +43,7 @@ const { expect } = chai;
 const neuesAuto: Auto = {
     modell: 'Neu',
     rating: 1,
-    art: 'DRUCKAUSGABE',
+    art: 'CABRIO',
     produzent: 'FOO_PRODUZENT',
     preis: 99.99,
     rabatt: 0.099,
@@ -70,7 +70,7 @@ const neuesAutoInvalid: object = {
 const neuesAutoModelExistiert: Auto = {
     modell: 'Alpha',
     rating: 1,
-    art: 'DRUCKAUSGABE',
+    art: 'CABRIO',
     produzent: 'FOO_PRODUZENT',
     preis: 99.99,
     rabatt: 0.099,
@@ -179,7 +179,7 @@ describe('POST /api/autos', () => {
         } = await response.json();
 
         expect(art).to.be.equal(
-            'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.',
+            'Die Art eines Autoes muss SUV oder CABRIO sein.',
         );
         expect(rating).to.be.equal(
             'Eine Bewertung muss zwischen 0 und 5 liegen.',

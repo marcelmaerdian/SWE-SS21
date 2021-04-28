@@ -70,7 +70,7 @@ export const validateAuto = (auto: Auto) => {
                 break;
             case '/art':
                 errorMsg.art =
-                    'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.';
+                    'Die Art eines Autoes muss SUV oder CABRIO sein.';
                 break;
             case '/produzent':
                 errorMsg.produzent =

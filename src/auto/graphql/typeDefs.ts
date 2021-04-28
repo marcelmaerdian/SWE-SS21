@@ -47,8 +47,8 @@ import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
     "Enum-Typ fuer die Art eines Autoes"
     enum Art {
-        DRUCKAUSGABE
-        KINDLE
+        CABRIO
+        SUV
     }
 
     "Enum-Typ fuer den Produzent eines Autoes"
