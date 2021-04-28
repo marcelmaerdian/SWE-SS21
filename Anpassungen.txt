@@ -91,11 +91,11 @@ Yannick -> alle Dateien
 
 [x] Projektplanung mit Project Professional (MIT ANKÜNDIGUNG ABGABETERMINS)
 [x] Kommandos in einer Powershell: hostname und date
-[ ] Zeiterfassung mit z.B. einem einfachen Excelsheet
+[~] Zeiterfassung mit z.B. einem einfachen Excelsheet
 [x] REST-Schnittstelle einschl. ETags, Location-Header sowie HATEOAS mit Lesen und Schreiben einschl. Validierung
 [x] GraphQL-Schnittstelle mit Lesen und Schreiben
 [x] Visualisierung jeweils von Request und Response
-[~] ESLint, Prettier und SonarQube
+[X] ESLint, Prettier und SonarQube
 [x] DB-Zugriff (Visualisierung der persistenten Daten nicht vergessen)
 [x] Security (Visualisierung des Zugriffsschutzes nicht vergessen)
 [x] Integrationstests (einschl. 400er Fehler) mit Test-Coverage
@@ -107,5 +107,5 @@ Yannick -> alle Dateien
 [x] Deployment mit Heroku
 [~] Jenkins (ohne Tests)
 [X] Einfache Dokumentation mit AsciiDoctor und PlantUML
-[ ] API-Dokumentation mit TypeDoc
-[~] Einfacher Foliensatz mit revealjs
+[X] API-Dokumentation mit TypeDoc
+[X] Einfacher Foliensatz mit revealjs
