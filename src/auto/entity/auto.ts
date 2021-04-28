@@ -31,7 +31,7 @@ export type Produzent = 'BAR_PRODUZENT' | 'FOO_PRODUZENT';
 /**
  * Alias-Typ für gültige Strings bei der Art eines Autoes.
  */
-export type AutoArt = 'DRUCKAUSGABE' | 'KINDLE';
+export type AutoArt = 'CABRIO' | 'SUV';
 
 /**
  * Gemeinsames Interface für _REST_, _GraphQL_ und _Mongoose_.

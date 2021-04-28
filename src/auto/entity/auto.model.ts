@@ -90,7 +90,7 @@ export const autoSchema = new Schema<AutoDocument, Model<AutoDocument>>(
         _id: { type: String, default: uuid },
         modell: { type: String, required: true, unique: true },
         rating: { type: Number, min: 0, max: 5 },
-        art: { type: String, enum: ['DRUCKAUSGABE', 'KINDLE'] },
+        art: { type: String, enum: ['CABRIO', 'SUV'] },
         produzent: {
             type: String,
             required: true,

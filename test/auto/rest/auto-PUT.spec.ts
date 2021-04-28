@@ -44,7 +44,7 @@ const geaendertesAuto: Omit<Auto, 'seriennummer'> = {
     // seriennummer wird nicht geaendet
     modell: 'Geaendert',
     rating: 1,
-    art: 'DRUCKAUSGABE',
+    art: 'CABRIO',
     produzent: 'FOO_PRODUZENT',
     preis: 33.33,
     rabatt: 0.033,
@@ -62,7 +62,7 @@ const geaendertesAutoIdNichtVorhanden: Omit<
 > = {
     modell: 'Nichtvorhanden',
     rating: 1,
-    art: 'DRUCKAUSGABE',
+    art: 'CABRIO',
     produzent: 'FOO_PRODUZENT',
     preis: 33.33,
     rabatt: 0.033,
@@ -91,7 +91,7 @@ const veraltesAuto: object = {
     // seriennummer wird nicht geaendet
     model: 'Veraltet',
     rating: 1,
-    art: 'DRUCKAUSGABE',
+    art: 'CABRIO',
     produzent: 'FOO_PRODUZENT',
     preis: 33.33,
     rabatt: 0.033,
@@ -208,7 +208,7 @@ describe('PUT /api/autos/:id', () => {
             seriennummer,
         } = await response.json();
         expect(art).to.be.equal(
-            'Die Art eines Autoes muss KINDLE oder DRUCKAUSGABE sein.',
+            'Die Art eines Autoes muss SUV oder CABRIO sein.',
         );
         expect(rating).to.be.equal(
             `Eine Bewertung muss zwischen 0 und ${MAX_RATING} liegen.`,
