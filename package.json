@@ -1,7 +1,7 @@
 {
-  "name": "beispiel",
+  "name": "auto",
   "version": "1.0.0",
-  "description": "Beispiel",
+  "description": "Auto-Server",
   "main": "dist/server.js",
   "engines": {
     "node": ">=14.16.0",
